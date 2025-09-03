@@ -20,11 +20,11 @@ public class PlayerManagement : MonoBehaviour
         PlayerInputManager.instance.onPlayerLeft += PlayerLeft;
     }
 
-    private void OnDisable()
-    {
-        PlayerInputManager.instance.onPlayerJoined -= PlayerJoined;
-        PlayerInputManager.instance.onPlayerLeft -= PlayerLeft;
-    }
+    // private void OnDisable()
+    // {
+    //     PlayerInputManager.instance.onPlayerJoined -= PlayerJoined;
+    //     PlayerInputManager.instance.onPlayerLeft -= PlayerLeft;
+    // }
 
     public void PlayerJoined(PlayerInput a_playerInput)
     {

@@ -2,7 +2,7 @@ using UnityEngine;
 using NaughtyAttributes;
 using Unity.VisualScripting;
 
-public class OvenTemp : MonoBehaviour
+public class OvenTemp : MonoBehaviour, IInteract
 {
     [SerializeField] private int _playerAssigned;
     public int PlayerAssigned { get => _playerAssigned; }
@@ -27,6 +27,7 @@ public class OvenTemp : MonoBehaviour
         }
     }
 
+    private SOPizza _pizzaInfos = null;
     [SerializeField] bool _isPizzaIn = false;
     [SerializeField] private float _pizzaStatus = 0.0f;
 
@@ -69,29 +70,63 @@ public class OvenTemp : MonoBehaviour
                 timeToCook = _ovenValues.CookingTimeMedium + (multi * (_ovenValues.CookingTimeMax - _ovenValues.CookingTimeMedium));
             }
             
-            Debug.Log($"Cooking time : {timeToCook}");
             _pizzaStatus = Mathf.Clamp(_pizzaStatus + ((100f / timeToCook) * Time.fixedDeltaTime), 0f, 200f);
 
             CookingGaugeUpdate();
         }
     }
 
-    public void AddInFire(Item a_givenItem)
+    public void Interact(PlayerInteractions a_player)
     {
-        currentTemp += a_givenItem.value;
+        if (PlayerAssigned != a_player.Core.PlayerID)
+        {
+            if (a_player.Item != null &&
+                a_player.Item.type == SOItems.TYPE.Fuel)
+            {
+                AddInFire((SOFuel)a_player.TakeItem());
+            }
 
-        switch (a_givenItem.effect)
+            return;
+        }
+        
+        if (a_player.Item != null)
+        {
+            switch (a_player.Item.type)
+            {
+                case SOItems.TYPE.Pizza:
+                    if (_isPizzaIn)
+                        RemovePizza();
+                    else
+                        AddPizza((SOPizza)a_player.TakeItem());
+                    break;
+                case SOItems.TYPE.Fuel:
+                    AddInFire((SOFuel)a_player.TakeItem());
+                    break;
+            }
+        }
+        else
+        {
+            if (_isPizzaIn)
+                RemovePizza();
+        }
+    }
+    
+    private void AddInFire(SOFuel a_fuelItem)
+    {
+        currentTemp += a_fuelItem.itemValue;
+
+        switch (a_fuelItem.effect)
         {
             default:
                 break;
         }
     }
     
-    [Button]
-    private bool AddPizza()
+    private bool AddPizza(SOPizza a_pizza)
     {
-        if (!_isPizzaIn)
+        if (a_pizza != null && !_isPizzaIn)
         {
+            _pizzaInfos = a_pizza;
             _isPizzaIn = true;
             _pizzaStatus = 0.0f;
 
@@ -118,8 +153,9 @@ public class OvenTemp : MonoBehaviour
             Debug.Log($"Between Perfect cook and Overcook : {_pizzaStatus}");
         }
 
-        _ovenValues.AddScore(PlayerAssigned, _pizzaStatus);
+        _ovenValues.AddScore(PlayerAssigned, _pizzaStatus / 100f, _pizzaInfos ? _pizzaInfos.itemValue : 1.0f);
 
+        _pizzaInfos = null;
         _isPizzaIn = false;
 
         _cookingGaugeTransform.localPosition = new Vector3(-0.5f, 0, 0);
@@ -148,6 +184,18 @@ public class OvenTemp : MonoBehaviour
     {
         currentTemp += 10;
     }
+    [Button]
+    private bool AddPizza()
+    {
+        if (!_isPizzaIn)
+        {
+            _isPizzaIn = true;
+            _pizzaStatus = 0.0f;
 
+            return true;
+        }
+        else
+            return false;
+    }
 #endif
 }

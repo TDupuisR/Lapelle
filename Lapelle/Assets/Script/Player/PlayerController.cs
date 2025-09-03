@@ -1,78 +1,58 @@
 using System.Collections;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerInput))]
-public class PlayerController : MonoBehaviour , Idamage
+public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private PlayerCore _playerCore;
+    public PlayerCore Core { get => _playerCore; }
+    
     private Vector2 _moveInput; 
-    public float speed = 5f;
-    public bool canAttack = true;
-    public bool isStunt = false;
-    public bool isInvincible = false;
-    public float reload = 1f;
-    public bool canAttackEnemy = false;
-    public Collider2D enemyCollider;
+    [SerializeField] private float speed = 5f;
+    [SerializeField] private float knockback = 2f;
+    
+    [SerializeField] private bool isStunt = false;
+    [SerializeField] private float _stunDuration = 3f;
+    [SerializeField] private bool isInvincible = false;
+    [SerializeField] private float _invincibilityDuration = 1f;
+    
+    [SerializeField] private Rigidbody2D _rb;
 
     public void OnMove(InputValue value)
     {
         _moveInput = value.Get<Vector2>();
     }
 
-    void Update()
+    private void FixedUpdate()
     {
         if(isStunt == false)
         {
             Vector3 move = new Vector3(_moveInput.x, _moveInput.y, 0f);
-            transform.Translate(move * speed * Time.deltaTime);
-        }
-
-        if (Input.GetMouseButtonDown(0) && enemyCollider != null)
-        {
-            if (canAttack == true && isStunt == false)
-            {
-                Idamage target = enemyCollider.GetComponent<Idamage>();
-                Debug.Log(target); // renvoie null quand c'est le rat
-                target.TakeDamage();
-                Debug.Log("Attack de" + gameObject);
-            }
+            _rb.MovePosition(transform.position + (move * speed * Time.fixedDeltaTime));
         }
     }
-
-    private void OnTriggerEnter2D(Collider2D enemy)
+    
+    public void TakeDamage(Vector3 a_position)
     {
-        if (enemy.CompareTag("Player") || enemy.CompareTag("Rat"))
+        if (isInvincible == false)
         {
-            canAttackEnemy = true;
-            enemyCollider = enemy;
-        }
-    }
-    private void OnTriggerExit2D(Collider2D enemy)
-    {
-        if (enemy.CompareTag("Player") || enemy.CompareTag("Rat"))
-        {
-            canAttackEnemy = false;
-            enemyCollider = null;
-        }
-    }
-    public void TakeDamage()
-    {
-        if (isStunt == false && isInvincible == false)
-        {
-            Debug.Log(gameObject + "à reçu des dégats");
+            Vector3 move = (transform.position + a_position).normalized;
+            _rb.MovePosition(transform.position + (move * knockback));
+            
             isStunt = true;
+            Core.Interaction.DropItem();
             isInvincible = true;
             StartCoroutine(StopAttackIsStunt());
         }
     }
 
-    IEnumerator StopAttackIsStunt()
+    private IEnumerator StopAttackIsStunt()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(_stunDuration);
         isStunt = false;
-        yield return new WaitForSeconds(1);
-        canAttack = true;
+        Core.Interaction.canInteract = true;
+        yield return new WaitForSeconds(_invincibilityDuration);
         isInvincible = false;
     }
 

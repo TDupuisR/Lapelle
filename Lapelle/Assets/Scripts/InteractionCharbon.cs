@@ -1,4 +1,5 @@
 using UnityEngine;
+using NaughtyAttributes;
 
 public class InteractionCharbon : MonoBehaviour
 {
@@ -90,20 +91,21 @@ public class InteractionCharbon : MonoBehaviour
         }
     }
 
+    [Button]
     public void AddCharbonBas()
     {
         Debug.Log("Le joueur récupére un objet");
         haveObject = true;
         giveItemSystem.RamdomItemEnBas();
     }
-
+    [Button]
     public void AddCharbonMilieu()
     {
         Debug.Log("Le joueur récupére un objet");
         haveObject = true;
         giveItemSystem.RamdomItemAuMilieu();
     }
-
+    [Button]
     public void RemoveObject()
     {
         Debug.Log("Le joueur dépose un objet");

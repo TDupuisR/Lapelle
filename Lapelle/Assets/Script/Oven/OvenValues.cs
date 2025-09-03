@@ -62,10 +62,10 @@ public class OvenValues : MonoBehaviour
         switch (a_playerNumber)
         {
             case 1:
-                _player1Score += Mathf.RoundToInt(a_cookingAccuracy * modifier);
+                _player1Score += Mathf.RoundToInt(a_cookingAccuracy * _pizzaScore * modifier);
                 break;
             case 2:
-                _player2Score += Mathf.RoundToInt(a_cookingAccuracy * modifier);
+                _player2Score += Mathf.RoundToInt(a_cookingAccuracy * _pizzaScore * modifier);
                 break;
             
             default:

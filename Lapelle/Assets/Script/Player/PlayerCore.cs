@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerCore : MonoBehaviour
+public class PlayerCore : MonoBehaviour, IInteract
 {
     [SerializeField] private int _playerID;
     public int PlayerID { get => _playerID; }
@@ -9,8 +9,8 @@ public class PlayerCore : MonoBehaviour
     [SerializeField] private PlayerController _playerController;
     public PlayerController Controller { get => _playerController; private set => _playerController = value; }
 
-    [SerializeField] private InteractionCharbon _interactionCharbon;
-    public InteractionCharbon Interaction { get => _interactionCharbon; private set => _interactionCharbon = value; }
+    [SerializeField] private PlayerInteractions _playerInteractions;
+    public PlayerInteractions Interaction { get => _playerInteractions; private set => _playerInteractions = value; }
 
     [SerializeField] private SpriteRenderer _spriteRenderer;
     public SpriteRenderer SpriteComponent { get => _spriteRenderer; set => _spriteRenderer = value; }
@@ -33,7 +33,7 @@ public class PlayerCore : MonoBehaviour
 
         if (Interaction == null)
         {
-            if (TryGetComponent<InteractionCharbon>(out InteractionCharbon o_interaction))
+            if (TryGetComponent<PlayerInteractions>(out PlayerInteractions o_interaction))
             {
                 Interaction = o_interaction;
             }
@@ -59,5 +59,10 @@ public class PlayerCore : MonoBehaviour
     public void Init(int a_playerID/*, SOPlayerInfos a_playerInfos*/)
     {
         _playerID = a_playerID;
+    }
+
+    public void Interact(PlayerInteractions a_player)
+    {
+        Controller.TakeDamage(a_player.transform.position);
     }
 }

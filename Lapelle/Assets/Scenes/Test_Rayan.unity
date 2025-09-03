@@ -992,9 +992,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -5590734155556045765, guid: c13ecda6014f44a96863dedb9f648807, type: 3}
+      propertyPath: isCharbon
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5590734155556045765, guid: c13ecda6014f44a96863dedb9f648807, type: 3}
       propertyPath: itemPlayer
       value: 
       objectReference: {fileID: 1638508770}
+    - target: {fileID: -5590734155556045765, guid: c13ecda6014f44a96863dedb9f648807, type: 3}
+      propertyPath: isCharbonBas
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -5590734155556045765, guid: c13ecda6014f44a96863dedb9f648807, type: 3}
       propertyPath: giveItemSystem
       value: 
@@ -1002,6 +1010,10 @@ PrefabInstance:
     - target: {fileID: 673097637295307044, guid: c13ecda6014f44a96863dedb9f648807, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 992032169401090197, guid: c13ecda6014f44a96863dedb9f648807, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1580555273796247920, guid: c13ecda6014f44a96863dedb9f648807, type: 3}
       propertyPath: m_LocalPosition.x
