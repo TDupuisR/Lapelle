@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1833582367094894941}
   m_Layer: 0
   m_Name: Zone_Charbon
-  m_TagString: Charbon
+  m_TagString: TasCharbonBas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

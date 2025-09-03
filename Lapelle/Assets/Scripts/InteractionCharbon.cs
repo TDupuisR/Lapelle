@@ -3,22 +3,30 @@ using UnityEngine;
 public class InteractionCharbon : MonoBehaviour
 {
     public bool isCharbon = false;
+    public bool isCharbonBas = false;
+    public bool isCharbonMilieu = false;
     public bool haveCharbon = false;
     public bool isZoneCharbon = false;
     public GameObject chabonSprite;
-
-    void Start()
-    {
-    }
+    public ItemPlayer itemPlayer;
+    public GiveItemSystem giveItemSystem;
 
     // Update is called once per frame
     void Update()
     {
-        if (isCharbon)
+        if (isCharbon && isCharbonBas)
         {
             if (Input.GetKeyDown(KeyCode.I))
             {
-                AddCharbon();
+                AddCharbonBas();
+            }
+        }
+
+        if (isCharbon && isCharbonMilieu)
+        {
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                AddCharbonMilieu();
             }
         }
 
@@ -30,7 +38,7 @@ public class InteractionCharbon : MonoBehaviour
             }
         }
 
-        if (haveCharbon)
+        if (haveCharbon && itemPlayer.item.nom == "Charbon")
         {
             chabonSprite.SetActive(true);
         }
@@ -42,12 +50,21 @@ public class InteractionCharbon : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Charbon"))
+        if (collision.CompareTag("TasCharbonBas"))
         {
+            isCharbonBas = true;
             isCharbon = true;
+
         }
 
-        if (collision.CompareTag("Four"))
+        else if (collision.CompareTag("TasCharbonMilieu"))
+        {
+            isCharbonMilieu = true;
+            isCharbon = true;
+
+        }
+
+        else if (collision.CompareTag("Four"))
         {
             isZoneCharbon = true;
         }
@@ -55,8 +72,15 @@ public class InteractionCharbon : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Charbon"))
+        if (collision.CompareTag("TasCharbonBas"))
         {
+            isCharbonBas = false;
+            isCharbon = false;
+        }
+
+        else if (collision.CompareTag("TasCharbonMilieu"))
+        {
+            isCharbonMilieu = false;
             isCharbon = false;
         }
 
@@ -66,15 +90,24 @@ public class InteractionCharbon : MonoBehaviour
         }
     }
 
-    public void AddCharbon()
+    public void AddCharbonBas()
     {
-        Debug.Log("Le joueur r�cup�re un charbon");
+        Debug.Log("Le joueur r�cup�re un objet");
         haveCharbon = true;
+        giveItemSystem.RamdomItemEnBas();
+    }
+
+    public void AddCharbonMilieu()
+    {
+        Debug.Log("Le joueur r�cup�re un objet");
+        haveCharbon = true;
+        giveItemSystem.RamdomItemAuMilieu();
     }
 
     public void RemoveCharbon()
     {
-        Debug.Log("Le joueur d�pose un charbon");
+        Debug.Log("Le joueur d�pose un objet");
         haveCharbon = false;
+        itemPlayer.item = null;
     }
 }

@@ -8,7 +8,8 @@ using static UnityEngine.Rendering.DebugUI;
 public struct listItem
 {
     public Item item;
-    public int pourcentage;
+    public int pourcentageEnBas;
+    public int pourcentageAuMilieu;
 }
 
 public class GiveItemSystem : MonoBehaviour
@@ -17,38 +18,54 @@ public class GiveItemSystem : MonoBehaviour
     public ItemPlayer playerItem;
     public int maxPourcentage;
     public int randomize = 0;
+    public bool isBottom = true;
 
     public void Start()
     {
+
+    }
+    
+    public void RamdomItemEnBas()
+    {
+        Debug.Log("En Bas debut");
         for (int i = 0; i < liste_des_items.Count; i++)
         {
-            maxPourcentage = maxPourcentage + liste_des_items[i].pourcentage;
+            maxPourcentage = maxPourcentage + liste_des_items[i].pourcentageEnBas;
         }
-    }
-    //playerItem.item = liste_des_items[randomize].item; 
-    public void RamdomItem()
-    {
+
         randomize = UnityEngine.Random.Range(0, maxPourcentage);
-        Result(randomize,0);
+        Result(randomize, 0);
         Debug.Log(randomize);
     }
-    public void Result(int valueRandom,int element)
+
+    public void RamdomItemAuMilieu()
     {
-        Debug.Log(valueRandom + "debut");
+       Debug.Log("Au Milieu debut");
+       for (int i = 0; i < liste_des_items.Count; i++)
+       {
+           maxPourcentage = maxPourcentage + liste_des_items[i].pourcentageAuMilieu;
+       }
 
-
-        if (valueRandom > liste_des_items[element].pourcentage)
-        {
-            valueRandom = valueRandom - liste_des_items[element].pourcentage;
-            element++;
-            Debug.Log("non trop petit" +  valueRandom);
-            Result(valueRandom,element);
-        }
-        else
-        {
-            playerItem.item = liste_des_items[element].item;
-            Debug.Log("ok" + element);
-        }
+        randomize = UnityEngine.Random.Range(0, maxPourcentage);
+        Result(randomize, 0);
+        Debug.Log(randomize);
     }
 
+    public void Result(int valueRandom, int element)
+    {
+          Debug.Log(valueRandom + "debut");
+
+          if (valueRandom > liste_des_items[element].pourcentageEnBas)
+          {
+              valueRandom = valueRandom - liste_des_items[element].pourcentageEnBas;
+              element++;
+              Debug.Log("non trop petit" + valueRandom);
+              Result(valueRandom, element);
+          }
+          else
+          {
+              playerItem.item = liste_des_items[element].item;
+              Debug.Log("Item ajouté est : " + liste_des_items[element].item.nom);
+          }
+    }
 }
