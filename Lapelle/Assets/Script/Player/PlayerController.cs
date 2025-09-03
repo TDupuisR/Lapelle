@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour , Idamage
             if (canAttack == true && isStunt == false)
             {
                 Idamage target = enemyCollider.GetComponent<Idamage>();
+                Debug.Log(target); // renvoie null quand c'est le rat
                 target.TakeDamage();
                 Debug.Log("Attack de" + gameObject);
             }
@@ -41,7 +42,7 @@ public class PlayerController : MonoBehaviour , Idamage
 
     private void OnTriggerEnter2D(Collider2D enemy)
     {
-        if (enemy.CompareTag("Player"))
+        if (enemy.CompareTag("Player") || enemy.CompareTag("Rat"))
         {
             canAttackEnemy = true;
             enemyCollider = enemy;
@@ -49,7 +50,7 @@ public class PlayerController : MonoBehaviour , Idamage
     }
     private void OnTriggerExit2D(Collider2D enemy)
     {
-        if (enemy.CompareTag("Player"))
+        if (enemy.CompareTag("Player") || enemy.CompareTag("Rat"))
         {
             canAttackEnemy = false;
             enemyCollider = null;
