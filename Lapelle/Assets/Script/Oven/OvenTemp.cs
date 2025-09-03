@@ -27,14 +27,14 @@ public class OvenTemp : MonoBehaviour
         }
     }
 
-    private bool _isPizzaIn = false;
-    private float _pizzaStatus = 0.0f;
+    [SerializeField] bool _isPizzaIn = false;
+    [SerializeField] private float _pizzaStatus = 0.0f;
 
     [SerializeField] private Transform _cookingGaugeTransform;
     [SerializeField] private SpriteRenderer _cookingGaugeSprite;
 
 
-    public bool FireIsRunning = true;
+    [SerializeField] public bool FireIsRunning = true;
 
     private void Start()
     {
@@ -52,7 +52,6 @@ public class OvenTemp : MonoBehaviour
         if (FireIsRunning)
         {
             currentTemp -= _ovenValues.TempLoss * Time.fixedDeltaTime;
-            Debug.Log($"Temp : {currentTemp}");
         }
 
         if (_isPizzaIn)
@@ -69,8 +68,9 @@ public class OvenTemp : MonoBehaviour
                 float multi = Mathf.Clamp01(Mathf.Abs(currentTemp) / _ovenValues.TempMax);
                 timeToCook = _ovenValues.CookingTimeMedium + (multi * (_ovenValues.CookingTimeMax - _ovenValues.CookingTimeMedium));
             }
-
-            _pizzaStatus = Mathf.Clamp(_pizzaStatus + (100f / timeToCook) * Time.fixedDeltaTime, 0f, 200f);
+            
+            Debug.Log($"Cooking time : {timeToCook}");
+            _pizzaStatus = Mathf.Clamp(_pizzaStatus + ((100f / timeToCook) * Time.fixedDeltaTime), 0f, 200f);
 
             CookingGaugeUpdate();
         }
@@ -86,17 +86,26 @@ public class OvenTemp : MonoBehaviour
                 break;
         }
     }
-
+    
     [Button]
-    public void AddPizza()
+    private bool AddPizza()
     {
-        _isPizzaIn = true;
-        _pizzaStatus = 0.0f;
+        if (!_isPizzaIn)
+        {
+            _isPizzaIn = true;
+            _pizzaStatus = 0.0f;
+
+            return true;
+        }
+        else
+            return false;
     }
-
     [Button]
-    public void RemovePizza()
+    private void RemovePizza()
     {
+        if (!_isPizzaIn)
+            return;
+        
         if (_pizzaStatus <= 100f)
         {
             Debug.Log($"Between Undercook and Perfect cook : {_pizzaStatus}");
@@ -121,15 +130,15 @@ public class OvenTemp : MonoBehaviour
     {
         if (_pizzaStatus <= 100f)
         {
-            _cookingGaugeTransform.localPosition = new Vector3(Mathf.Lerp(-0.5f, 0f, _pizzaStatus / 100f), 0, 0);
+            _cookingGaugeTransform.localPosition = new Vector3(Mathf.Lerp(-0.5f, 0f, _pizzaStatus / 100f), 0, -1);
             _cookingGaugeTransform.localScale = new Vector3(Mathf.Lerp(0f, 1f, _pizzaStatus / 100f), 1, 1);
             _cookingGaugeSprite.color = Color.Lerp(Color.blue, Color.green, _pizzaStatus / 100f);
         }
         else
         {
-            _cookingGaugeTransform.localPosition = Vector3.zero;
+            _cookingGaugeTransform.localPosition = -Vector3.forward;
             _cookingGaugeTransform.localScale = Vector3.one;
-            _cookingGaugeSprite.color = Color.Lerp(Color.green, Color.red, _pizzaStatus - 100f);
+            _cookingGaugeSprite.color = Color.Lerp(Color.green, Color.red, (_pizzaStatus - 100f) / 100f);
         }
     }
 
