@@ -9,7 +9,6 @@ public class InteractionCharbon : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Salut");
     }
 
     // Update is called once per frame
@@ -50,7 +49,7 @@ public class InteractionCharbon : MonoBehaviour
             isCharbon = true;
         }
 
-        if (collision.CompareTag("ZoneCharbon"))
+        if (collision.CompareTag("Four"))
         {
             isZoneCharbon = true;
         }
@@ -63,7 +62,7 @@ public class InteractionCharbon : MonoBehaviour
             isCharbon = false;
         }
 
-        if (collision.CompareTag("ZoneCharbon"))
+        if (collision.CompareTag("Four"))
         {
             isZoneCharbon = false;
         }
