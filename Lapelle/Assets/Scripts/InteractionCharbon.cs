@@ -3,7 +3,7 @@ using UnityEngine;
 public class InteractionCharbon : MonoBehaviour
 {
     public bool isCharbon = false;
-    public int nbrCharbon = 0;
+    public bool haveCharbon = false;
     public bool isZoneCharbon = false;
     public GameObject chabonSprite;
 
@@ -18,21 +18,19 @@ public class InteractionCharbon : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.I))
             {
-                Debug.Log("Le joueur récupére un charbon");
-                nbrCharbon++;
+                AddCharbon();
             }
         }
 
         if (isZoneCharbon)
         {
-            if (Input.GetKeyDown(KeyCode.I) && nbrCharbon > 0)
+            if (Input.GetKeyDown(KeyCode.I) && haveCharbon)
             {
-                Debug.Log("Le joueur dépose un charbon");
-                nbrCharbon--;
+                RemoveCharbon();
             }
         }
 
-        if(nbrCharbon > 0)
+        if (haveCharbon)
         {
             chabonSprite.SetActive(true);
         }
@@ -66,5 +64,17 @@ public class InteractionCharbon : MonoBehaviour
         {
             isZoneCharbon = false;
         }
+    }
+
+    public void AddCharbon()
+    {
+        Debug.Log("Le joueur rï¿½cupï¿½re un charbon");
+        haveCharbon = true;
+    }
+
+    public void RemoveCharbon()
+    {
+        Debug.Log("Le joueur dï¿½pose un charbon");
+        haveCharbon = false;
     }
 }
