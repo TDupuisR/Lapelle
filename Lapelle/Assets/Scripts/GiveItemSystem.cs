@@ -22,7 +22,7 @@ public class GiveItemSystem : MonoBehaviour
 
     public void Start()
     {
-
+        Debug.Log(liste_des_items.Count);
     }
     
     public void RamdomItemEnBas()
@@ -32,9 +32,9 @@ public class GiveItemSystem : MonoBehaviour
         {
             maxPourcentage = maxPourcentage + liste_des_items[i].pourcentageEnBas;
         }
-
+        Debug.Log("Max Pourcentage = " +  maxPourcentage);
         randomize = UnityEngine.Random.Range(0, maxPourcentage);
-        Result(randomize, 0);
+        ResultEnBas(randomize, 0);
         Debug.Log(randomize);
     }
 
@@ -45,27 +45,57 @@ public class GiveItemSystem : MonoBehaviour
        {
            maxPourcentage = maxPourcentage + liste_des_items[i].pourcentageAuMilieu;
        }
-
+        Debug.Log("Max Pourcentage = " + maxPourcentage);
         randomize = UnityEngine.Random.Range(0, maxPourcentage);
-        Result(randomize, 0);
-        Debug.Log(randomize);
+       ResultAuMilieu(randomize, 0);
+       Debug.Log(randomize);
     }
 
-    public void Result(int valueRandom, int element)
+    public void ResultEnBas(int valueRandom, int element)
     {
           Debug.Log(valueRandom + "debut");
 
           if (valueRandom > liste_des_items[element].pourcentageEnBas)
           {
               valueRandom = valueRandom - liste_des_items[element].pourcentageEnBas;
-              element++;
-              Debug.Log("non trop petit" + valueRandom);
-              Result(valueRandom, element);
+                if (element == liste_des_items.Count - 1)
+                {
+                element = 0;
+                }
+                element++;
+                Debug.Log("non trop petit" + valueRandom);
+                
+                ResultEnBas(valueRandom, element);
           }
           else
           {
               playerItem.item = liste_des_items[element].item;
               Debug.Log("Item ajouté est : " + liste_des_items[element].item.nom);
+              maxPourcentage = 0;
           }
+    }
+
+    public void ResultAuMilieu(int valueRandom, int element)
+    {
+        Debug.Log(valueRandom + "debut");
+
+        if (valueRandom > liste_des_items[element].pourcentageAuMilieu)
+        {
+            valueRandom = valueRandom - liste_des_items[element].pourcentageAuMilieu;
+            if (element == liste_des_items.Count - 1)
+            {
+                element = 0;
+            }
+            element++;
+            Debug.Log("non trop petit" + valueRandom);
+
+            ResultAuMilieu(valueRandom, element);
+        }
+        else
+        {
+            playerItem.item = liste_des_items[element].item;
+            Debug.Log("Item ajouté est : " + liste_des_items[element].item.nom);
+            maxPourcentage = 0;
+        }
     }
 }
