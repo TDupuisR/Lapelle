@@ -798,7 +798,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1097095451289708174, guid: f03fbe960b7e9694190d2658d9b7725b, type: 3}
       propertyPath: m_TagString
-      value: TasCharbonMilieu
+      value: TasCharbonBas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1135,17 +1135,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   liste_des_items:
   - item: {fileID: 11400000, guid: dd10514774ef82e4e839aca0bf67f552, type: 2}
-    pourcentageEnBas: 100
-    pourcentageAuMilieu: 50
-  - item: {fileID: 11400000, guid: 375c171949457e045a132d77230de9ac, type: 2}
     pourcentageEnBas: 50
-    pourcentageAuMilieu: 50
+    pourcentageAuMilieu: 18
+  - item: {fileID: 11400000, guid: 375c171949457e045a132d77230de9ac, type: 2}
+    pourcentageEnBas: 0
+    pourcentageAuMilieu: 23
   - item: {fileID: 11400000, guid: ac2e8687977593a4ab82bcbe7a21b31f, type: 2}
-    pourcentageEnBas: 40
-    pourcentageAuMilieu: 22
+    pourcentageEnBas: 20
+    pourcentageAuMilieu: 25
   - item: {fileID: 11400000, guid: d3ba21c56a4300246b1be11911918440, type: 2}
-    pourcentageEnBas: 122
-    pourcentageAuMilieu: 13
+    pourcentageEnBas: 30
+    pourcentageAuMilieu: 17
+  - item: {fileID: 11400000, guid: 48258f1da7b733041b59d98264ff4b94, type: 2}
+    pourcentageEnBas: 0
+    pourcentageAuMilieu: 5
+  - item: {fileID: 11400000, guid: 154fe578dcc069c4a89177a056d5f92f, type: 2}
+    pourcentageEnBas: 0
+    pourcentageAuMilieu: 10
   playerItem: {fileID: 1638508770}
   maxPourcentage: 0
   randomize: 0
