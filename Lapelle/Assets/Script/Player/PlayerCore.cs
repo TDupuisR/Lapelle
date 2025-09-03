@@ -2,16 +2,17 @@ using UnityEngine;
 
 public class PlayerCore : MonoBehaviour
 {
-    [SerializeField]
-    private PlayerController _playerController;
+    [SerializeField] private int _playerID;
+    public int PlayerID { get => _playerID; }
+    
+    [Space(7)]
+    [SerializeField] private PlayerController _playerController;
     public PlayerController Controller { get => _playerController; private set => _playerController = value; }
 
-    [SerializeField]
-    private InteractionCharbon _interactionCharbon;
+    [SerializeField] private InteractionCharbon _interactionCharbon;
     public InteractionCharbon Interaction { get => _interactionCharbon; private set => _interactionCharbon = value; }
 
-    [SerializeField]
-    private SpriteRenderer _spriteRenderer;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
     public SpriteRenderer SpriteComponent { get => _spriteRenderer; set => _spriteRenderer = value; }
 
     //public string PlayerName { get => gameObject.name; set => gameObject.name = value; }
@@ -53,5 +54,10 @@ public class PlayerCore : MonoBehaviour
                 Debug.LogError($"Player does not reference any SpriteRenderer", gameObject);
             }
         }
+    }
+
+    public void Init(int a_playerID/*, SOPlayerInfos a_playerInfos*/)
+    {
+        _playerID = a_playerID;
     }
 }

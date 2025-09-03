@@ -1,28 +1,40 @@
 using UnityEngine;
 using NaughtyAttributes;
+using Unity.VisualScripting;
 
 public class OvenTemp : MonoBehaviour
 {
-    [SerializeField] private PlayerScoring _playerScoring;
+    [SerializeField] private int _playerAssigned;
+    public int PlayerAssigned { get => _playerAssigned; }
+
+    [Space(7)]
+    [SerializeField] private OvenValues _ovenValues;
 
     [SerializeField] private Transform _tempCursor;
     [SerializeField] private float _maxAngle = 70;
 
     private float _currentTemp;
-    private float currentTemp
+    public float currentTemp
     {
         get => _currentTemp;
-        set
+        private set
         {
-            _currentTemp = Mathf.Clamp(value, -_playerScoring.TempLimit, _playerScoring.TempLimit);
+            _currentTemp = Mathf.Clamp(value, -_ovenValues.TempLimit, _ovenValues.TempLimit);
             float sign = -Mathf.Sign(_currentTemp);
 
-            float currentAngle = sign * ((Mathf.Abs(_currentTemp) * _maxAngle) / _playerScoring.TempLimit);
+            float currentAngle = sign * ((Mathf.Abs(_currentTemp) * _maxAngle) / _ovenValues.TempLimit);
             _tempCursor.localRotation = Quaternion.Euler(0, 0, currentAngle);
         }
     }
 
-    public bool timeRunning = true;
+    private bool _isPizzaIn = false;
+    private float _pizzaStatus = 0.0f;
+
+    [SerializeField] private Transform _cookingGaugeTransform;
+    [SerializeField] private SpriteRenderer _cookingGaugeSprite;
+
+
+    public bool FireIsRunning = true;
 
     private void Start()
     {
@@ -31,18 +43,40 @@ public class OvenTemp : MonoBehaviour
     public void Init()
     {
         currentTemp = 0;
+        _isPizzaIn = false;
+        FireIsRunning = false;
     }
 
     private void FixedUpdate()
     {
-        if (timeRunning)
+        if (FireIsRunning)
         {
-            currentTemp -= _playerScoring.TempLoss * Time.fixedDeltaTime;
+            currentTemp -= _ovenValues.TempLoss * Time.fixedDeltaTime;
             Debug.Log($"Temp : {currentTemp}");
+        }
+
+        if (_isPizzaIn)
+        {
+            float timeToCook;
+
+            if (currentTemp >= 0)
+            {
+                float multi = Mathf.Clamp01(currentTemp / _ovenValues.TempMax);
+                timeToCook = _ovenValues.CookingTimeMedium - (multi * (_ovenValues.CookingTimeMedium - _ovenValues.CookingTimeMin));
+            }
+            else
+            {
+                float multi = Mathf.Clamp01(Mathf.Abs(currentTemp) / _ovenValues.TempMax);
+                timeToCook = _ovenValues.CookingTimeMedium + (multi * (_ovenValues.CookingTimeMax - _ovenValues.CookingTimeMedium));
+            }
+
+            _pizzaStatus = Mathf.Clamp(_pizzaStatus + (100f / timeToCook) * Time.fixedDeltaTime, 0f, 200f);
+
+            CookingGaugeUpdate();
         }
     }
 
-    public void AddObject(Item a_givenItem)
+    public void AddInFire(Item a_givenItem)
     {
         currentTemp += a_givenItem.value;
 
@@ -52,6 +86,53 @@ public class OvenTemp : MonoBehaviour
                 break;
         }
     }
+
+    [Button]
+    public void AddPizza()
+    {
+        _isPizzaIn = true;
+        _pizzaStatus = 0.0f;
+    }
+
+    [Button]
+    public void RemovePizza()
+    {
+        if (_pizzaStatus <= 100f)
+        {
+            Debug.Log($"Between Undercook and Perfect cook : {_pizzaStatus}");
+        }
+        else if (_pizzaStatus > 100f)
+        {
+            _pizzaStatus -= 100f;
+            _pizzaStatus = Mathf.Clamp(100f - _pizzaStatus, 0, 100);
+
+            Debug.Log($"Between Perfect cook and Overcook : {_pizzaStatus}");
+        }
+
+        _ovenValues.AddScore(PlayerAssigned, _pizzaStatus);
+
+        _isPizzaIn = false;
+
+        _cookingGaugeTransform.localPosition = new Vector3(-0.5f, 0, 0);
+        _cookingGaugeTransform.localScale = new Vector3(0f, 1, 1);
+    }
+
+    private void CookingGaugeUpdate()
+    {
+        if (_pizzaStatus <= 100f)
+        {
+            _cookingGaugeTransform.localPosition = new Vector3(Mathf.Lerp(-0.5f, 0f, _pizzaStatus / 100f), 0, 0);
+            _cookingGaugeTransform.localScale = new Vector3(Mathf.Lerp(0f, 1f, _pizzaStatus / 100f), 1, 1);
+            _cookingGaugeSprite.color = Color.Lerp(Color.blue, Color.green, _pizzaStatus / 100f);
+        }
+        else
+        {
+            _cookingGaugeTransform.localPosition = Vector3.zero;
+            _cookingGaugeTransform.localScale = Vector3.one;
+            _cookingGaugeSprite.color = Color.Lerp(Color.green, Color.red, _pizzaStatus - 100f);
+        }
+    }
+
 #if UNITY_EDITOR
     [Button]
     public void AddTest()
