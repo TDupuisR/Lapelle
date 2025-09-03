@@ -53,8 +53,6 @@ public class GiveItemSystem : MonoBehaviour
 
     public void ResultEnBas(int valueRandom, int element)
     {
-          Debug.Log(valueRandom + "debut");
-
           if (valueRandom > liste_des_items[element].pourcentageEnBas)
           {
               valueRandom = valueRandom - liste_des_items[element].pourcentageEnBas;
@@ -62,9 +60,7 @@ public class GiveItemSystem : MonoBehaviour
                 {
                 element = 0;
                 }
-                element++;
-                Debug.Log("non trop petit" + valueRandom);
-                
+                element++;           
                 ResultEnBas(valueRandom, element);
           }
           else
@@ -77,8 +73,6 @@ public class GiveItemSystem : MonoBehaviour
 
     public void ResultAuMilieu(int valueRandom, int element)
     {
-        Debug.Log(valueRandom + "debut");
-
         if (valueRandom > liste_des_items[element].pourcentageAuMilieu)
         {
             valueRandom = valueRandom - liste_des_items[element].pourcentageAuMilieu;
@@ -87,13 +81,11 @@ public class GiveItemSystem : MonoBehaviour
                 element = 0;
             }
             element++;
-            Debug.Log("non trop petit" + valueRandom);
-
             ResultAuMilieu(valueRandom, element);
         }
         else
         {
-            playerItem.item = liste_des_items[element].item;
+            playerItem.item = liste_des_items[element].item;    
             Debug.Log("Item ajouté est : " + liste_des_items[element].item.nom);
             maxPourcentage = 0;
         }

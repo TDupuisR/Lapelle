@@ -5,8 +5,8 @@ public class InteractionCharbon : MonoBehaviour
     public bool isCharbon = false;
     public bool isCharbonBas = false;
     public bool isCharbonMilieu = false;
-    public bool haveCharbon = false;
-    public bool isZoneCharbon = false;
+    public bool haveObject = false;
+    public bool isZoneFour = false;
     public GameObject chabonSprite;
     public ItemPlayer itemPlayer;
     public GiveItemSystem giveItemSystem;
@@ -30,15 +30,15 @@ public class InteractionCharbon : MonoBehaviour
             }
         }
 
-        if (isZoneCharbon)
+        if (isZoneFour)
         {
-            if (Input.GetKeyDown(KeyCode.I) && haveCharbon)
+            if (Input.GetKeyDown(KeyCode.I) && haveObject)
             {
-                RemoveCharbon();
+                RemoveObject();
             }
         }
 
-        if (haveCharbon && itemPlayer.item.nom == "Charbon")
+        if (haveObject && itemPlayer.item.nom == "Charbon")
         {
             chabonSprite.SetActive(true);
         }
@@ -66,7 +66,7 @@ public class InteractionCharbon : MonoBehaviour
 
         else if (collision.CompareTag("Four"))
         {
-            isZoneCharbon = true;
+            isZoneFour = true;
         }
     }
 
@@ -86,28 +86,28 @@ public class InteractionCharbon : MonoBehaviour
 
         if (collision.CompareTag("Four"))
         {
-            isZoneCharbon = false;
+            isZoneFour = false;
         }
     }
 
     public void AddCharbonBas()
     {
-        Debug.Log("Le joueur r�cup�re un objet");
-        haveCharbon = true;
+        Debug.Log("Le joueur récupére un objet");
+        haveObject = true;
         giveItemSystem.RamdomItemEnBas();
     }
 
     public void AddCharbonMilieu()
     {
-        Debug.Log("Le joueur r�cup�re un objet");
-        haveCharbon = true;
+        Debug.Log("Le joueur récupére un objet");
+        haveObject = true;
         giveItemSystem.RamdomItemAuMilieu();
     }
 
-    public void RemoveCharbon()
+    public void RemoveObject()
     {
-        Debug.Log("Le joueur d�pose un objet");
-        haveCharbon = false;
+        Debug.Log("Le joueur dépose un objet");
+        haveObject = false;
         itemPlayer.item = null;
     }
 }
