@@ -302,9 +302,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCharbon: 0
-  nbrCharbon: 0
+  isCharbonBas: 0
+  isCharbonMilieu: 0
+  haveCharbon: 0
   isZoneCharbon: 0
   chabonSprite: {fileID: 369519081}
+  itemPlayer: {fileID: 0}
+  giveItemSystem: {fileID: 0}
 --- !u!70 &138696063
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -531,7 +535,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &626516231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -625,11 +629,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7599249183604310549, guid: 76bfff3fbe261164db37a9996819a3e9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.47
+      value: 7.23
       objectReference: {fileID: 0}
     - target: {fileID: 7599249183604310549, guid: 76bfff3fbe261164db37a9996819a3e9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.452
+      value: 2.26
       objectReference: {fileID: 0}
     - target: {fileID: 7599249183604310549, guid: 76bfff3fbe261164db37a9996819a3e9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -680,6 +684,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5590734155556045765, guid: c13ecda6014f44a96863dedb9f648807, type: 3}
+      propertyPath: itemPlayer
+      value: 
+      objectReference: {fileID: 1638508770}
+    - target: {fileID: -5590734155556045765, guid: c13ecda6014f44a96863dedb9f648807, type: 3}
+      propertyPath: giveItemSystem
+      value: 
+      objectReference: {fileID: 1638508771}
     - target: {fileID: 673097637295307044, guid: c13ecda6014f44a96863dedb9f648807, type: 3}
       propertyPath: m_Name
       value: Player
@@ -783,6 +795,10 @@ PrefabInstance:
     - target: {fileID: 1097095451289708174, guid: f03fbe960b7e9694190d2658d9b7725b, type: 3}
       propertyPath: m_Name
       value: Zone_Charbon
+      objectReference: {fileID: 0}
+    - target: {fileID: 1097095451289708174, guid: f03fbe960b7e9694190d2658d9b7725b, type: 3}
+      propertyPath: m_TagString
+      value: TasCharbonBas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1119,12 +1135,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   liste_des_items:
   - item: {fileID: 11400000, guid: dd10514774ef82e4e839aca0bf67f552, type: 2}
-    pourcentage: 30
+    pourcentageEnBas: 50
+    pourcentageAuMilieu: 18
   - item: {fileID: 11400000, guid: 375c171949457e045a132d77230de9ac, type: 2}
-    pourcentage: 50
+    pourcentageEnBas: 0
+    pourcentageAuMilieu: 23
+  - item: {fileID: 11400000, guid: ac2e8687977593a4ab82bcbe7a21b31f, type: 2}
+    pourcentageEnBas: 20
+    pourcentageAuMilieu: 25
+  - item: {fileID: 11400000, guid: d3ba21c56a4300246b1be11911918440, type: 2}
+    pourcentageEnBas: 30
+    pourcentageAuMilieu: 17
+  - item: {fileID: 11400000, guid: 48258f1da7b733041b59d98264ff4b94, type: 2}
+    pourcentageEnBas: 0
+    pourcentageAuMilieu: 5
+  - item: {fileID: 11400000, guid: 154fe578dcc069c4a89177a056d5f92f, type: 2}
+    pourcentageEnBas: 0
+    pourcentageAuMilieu: 10
   playerItem: {fileID: 1638508770}
   maxPourcentage: 0
   randomize: 0
+  isBottom: 1
 --- !u!1 &1728497182
 GameObject:
   m_ObjectHideFlags: 0

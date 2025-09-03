@@ -4,9 +4,10 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Charbon
   - ZoneCharbon
   - Four
+  - TasCharbonBas
+  - TasCharbonMilieu
   layers:
   - Default
   - TransparentFX
