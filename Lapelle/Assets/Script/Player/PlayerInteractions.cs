@@ -26,7 +26,6 @@ public class PlayerInteractions : MonoBehaviour
             TryGetComponent<PlayerCore>(out _playerCore);
     }
 
-
     public bool GiveItem(ItemBehaviour a_item)
     {
         if (_item == null)
@@ -73,6 +72,7 @@ public class PlayerInteractions : MonoBehaviour
             if (!_interactors.Contains(o_interactor))
             {
                 _interactors.Add(o_interactor);
+                canInteract = true;
             }
         }
     }
@@ -81,6 +81,12 @@ public class PlayerInteractions : MonoBehaviour
         if (collision.TryGetComponent<IInteract>(out IInteract o_interactor))
         {
             _interactors.Remove(o_interactor);
+            canInteract = false;
         }
+    }
+
+    public bool HasItem()
+    {
+        return _item != null;
     }
 }

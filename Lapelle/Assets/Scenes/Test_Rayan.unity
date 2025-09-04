@@ -1500,6 +1500,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1699363721}
   - component: {fileID: 1699363720}
+  - component: {fileID: 1699363723}
   - component: {fileID: 1699363722}
   m_Layer: 0
   m_Name: TasCharbon
@@ -1590,7 +1591,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eee28bb768456e4fb26203d71685fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  giveItem: {fileID: 0}
+  listItem:
+  - {fileID: 11400000, guid: f14f5b9315d4b1944b7166c514866256, type: 2}
+  - {fileID: 11400000, guid: 5da3388db823e6a4eb89de91e1d71bd4, type: 2}
+  - {fileID: 11400000, guid: ae6173e345c74b245a63d53841902243, type: 2}
+  - {fileID: 11400000, guid: ec239ea047909494cbfcabd657a4a85f, type: 2}
+  - {fileID: 11400000, guid: 3364de8796ce28a4491a9e1c65270906, type: 2}
+  - {fileID: 11400000, guid: ffe4fba231065684a87665c168cda242, type: 2}
+  - {fileID: 11400000, guid: f5368297446f8734097376573ce92e5d, type: 2}
+  itemPrefab: {fileID: 3703579406066307262, guid: 389fdb5d6b6a6044eae758f531609b13, type: 3}
+--- !u!61 &1699363723
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699363719}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &1728497182
 GameObject:
   m_ObjectHideFlags: 0
