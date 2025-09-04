@@ -299,6 +299,14 @@ PrefabInstance:
       propertyPath: _ovenManager
       value: 
       objectReference: {fileID: 2128813767}
+    - target: {fileID: 4372106267406556043, guid: 2e4f9d5487d2ac640a69c521f2b94021, type: 3}
+      propertyPath: _playerPrefab1
+      value: 
+      objectReference: {fileID: 4844874228271479813, guid: 19e57fa3eb6ffc8449d1830e8e171e41, type: 3}
+    - target: {fileID: 4372106267406556043, guid: 2e4f9d5487d2ac640a69c521f2b94021, type: 3}
+      propertyPath: _playerPrefab2
+      value: 
+      objectReference: {fileID: 1645757484863535837, guid: d40a468774cd8204a8bee8341e4f75be, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

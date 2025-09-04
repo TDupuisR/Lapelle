@@ -50,10 +50,19 @@ public class PlayerController : MonoBehaviour
             Vector3 move = new Vector3(_moveInput.x, _moveInput.y, 0f);
             _rb.MovePosition(transform.position + (move * speed * Time.fixedDeltaTime));
 
-            
+            if (move.magnitude <= 0f && Core.SpriteState != AnimationState.Idle)
+            {
+                Core.ChangeAnimationState(AnimationState.Idle);
+            }
+            else if (move.magnitude > 0f && (Core.SpriteState != AnimationState.Walk || Core.SpriteState != AnimationState.Dig))
+            {
+                Core.ChangeAnimationState(AnimationState.Walk);
+            }
+
+            Core.ChangeAniamtionDir(move);
         }
     }
-    public Direction CheckDirection(Vector2 a_dir)
+    public static Direction CheckDirection(Vector2 a_dir)
     {
         if (Mathf.Abs(a_dir.x) > Mathf.Abs(a_dir.y))
         {
@@ -65,17 +74,17 @@ public class PlayerController : MonoBehaviour
         else
         {
             if (a_dir.y <= 0)
-                return Direction.Top;
-            else
                 return Direction.Bottom;
+            else
+                return Direction.Top;
         }
     }
-    public Direction CheckVertical(Vector2 a_dir)
+    public static Direction CheckVertical(Vector2 a_dir)
     {
         if (a_dir.y <= 0)
-            return Direction.Top;
-        else
             return Direction.Bottom;
+        else
+            return Direction.Top;
     }
     
     public void TakeDamage(Vector3 a_position)
@@ -91,11 +100,12 @@ public class PlayerController : MonoBehaviour
             Core.Interaction.canInteract = false;
             Core.Interaction.DropItem();
             isInvincible = true;
-            StartCoroutine(StopAttackIsStunt());
+            Core.ChangeAnimationState(AnimationState.Idle);
+            StartCoroutine(StopAttackIsStun());
         }
     }
 
-    private IEnumerator StopAttackIsStunt()
+    private IEnumerator StopAttackIsStun()
     {
         yield return new WaitForSeconds(_stunDuration);
         isStunt = false;

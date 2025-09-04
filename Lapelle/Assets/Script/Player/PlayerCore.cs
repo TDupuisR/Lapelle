@@ -20,15 +20,16 @@ public class PlayerCore : MonoBehaviour, IInteract
     [SerializeField] private PlayerInteractions _playerInteractions;
     public PlayerInteractions Interaction { get => _playerInteractions; private set => _playerInteractions = value; }
 
-    [SerializeField] private SpriteRenderer _spriteRenderer;
-    public SpriteRenderer SpriteComponent { get => _spriteRenderer; set => _spriteRenderer = value; }
+    [SerializeField] private AnimationSocket _animationSocket;
+    public Transform Socket { get => _animationSocket.Socket; }
     [SerializeField] private PizzaSpawner _pizzaSpawner;
     public PizzaSpawner PizzaServing { get => _pizzaSpawner; }
 
     [Space(12)]
+    [SerializeField] private Transform _spriteTransform;
     [SerializeField] private Animator _animator;
-
-    //public string PlayerName { get => gameObject.name; set => gameObject.name = value; }
+    private AnimationState _animationState;
+    public AnimationState SpriteState { get => _animationState; }
 
     private void Start()
     {
@@ -55,33 +56,58 @@ public class PlayerCore : MonoBehaviour, IInteract
                 Debug.LogError($"Player does not reference any InteractionComponent", gameObject);
             }
         }
-
-        if (SpriteComponent == null)
-        {
-            if (TryGetComponent<SpriteRenderer>(out SpriteRenderer o_spriteRenderer))
-            {
-                SpriteComponent = o_spriteRenderer;
-            }
-            else
-            {
-                Debug.LogError($"Player does not reference any SpriteRenderer", gameObject);
-            }
-        }
     }
 
-    public void Init(int a_playerID/*, SOPlayerInfos a_playerInfos*/)
+    public void Init(int a_playerID, AnimationSocket a_socket)
     {
         _playerID = a_playerID;
+
+        _animationSocket = a_socket;
+        _spriteTransform = a_socket.transform;
+        _animator = a_socket.PlayerAnimator;
+
+        ChangeAnimationState(AnimationState.Idle);
+        ChangeAniamtionDir(Vector2.zero);
     }
 
     public void Interact(PlayerInteractions a_player)
     {
-        Debug.Log($"Receive Interaction {PlayerID}");
+        a_player.Core.ChangeAnimationState(AnimationState.Hit);
         Controller.TakeDamage(a_player.transform.position);
     }
 
-    public void ChangeAnimationState(AnimationState a_animation, Direction a_dir)
+    public void ChangeAnimationState(AnimationState a_animation)
     {
-        
+        if (_animator == null)
+            return;
+
+        _animationState = a_animation;
+        Debug.Log($"State {(int)_animationState}");
+        _animator.SetInteger("State", (int)_animationState);
+    }
+    public void ChangeAniamtionDir(Vector2 a_dir)
+    {
+        if (_animator == null)
+            return;
+
+        int direction = 1;
+
+        if (a_dir != Vector2.zero)
+        {
+            if (_animationState == AnimationState.Idle)
+                direction = (int)PlayerController.CheckVertical(a_dir);
+            else
+                direction = (int)PlayerController.CheckDirection(a_dir);
+        }
+        else
+            return;
+
+        if (direction == 2 || direction == 0)
+            _spriteTransform.localRotation = Quaternion.Euler(0, 180, 0);
+        else
+            _spriteTransform.localRotation = Quaternion.Euler(0, 0, 0);
+
+        Debug.Log($"Direction {direction}");
+        _animator.SetInteger("Direction", direction);
     }
 }

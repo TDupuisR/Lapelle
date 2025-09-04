@@ -4,8 +4,8 @@ using UnityEngine.InputSystem;
 public class PlayerManagement : MonoBehaviour
 {
     [Space(7)]
-    [SerializeField] private Color _playerColor1;
-    [SerializeField] private Color _playerColor2;
+    [SerializeField] private GameObject _playerPrefab1;
+    [SerializeField] private GameObject _playerPrefab2;
 
     [Space(7)]
     [SerializeField] private Transform _player1Spawn;
@@ -62,22 +62,24 @@ public class PlayerManagement : MonoBehaviour
             else if (_player1 == null)
             {
                 _player1 = o_player;
-                _player1.Init(1);
 
-                _player1.SpriteComponent.color = _playerColor1;
+                Debug.Log($"{_playerPrefab1 != null} - {_player1.transform != null}");
+
+                GameObject animator = Instantiate(_playerPrefab1, _player1.transform);
+                AnimationSocket socket = animator.GetComponent<AnimationSocket>();
                 _player1.transform.position = _player1Spawn.position;
 
+                _player1.Init(1, socket);
                 Debug.Log($"Player 1", _player1.gameObject);
             }
             else if (_player2 == null)
             {
                 _player2 = o_player;
-                _player2.Init(2);
-
-
-                _player2.SpriteComponent.color = _playerColor2;
+                GameObject animator = Instantiate(_playerPrefab2, _player2.transform);
+                AnimationSocket socket = animator.GetComponent<AnimationSocket>();
                 _player2.transform.position = _player2Spawn.position;
 
+                _player2.Init(2, socket);
                 Debug.Log($"Player 2", _player2.gameObject);
             }
         }
