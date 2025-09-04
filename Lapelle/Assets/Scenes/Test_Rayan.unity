@@ -658,6 +658,7 @@ GameObject:
   - component: {fileID: 610632984}
   - component: {fileID: 610632985}
   - component: {fileID: 610632986}
+  - component: {fileID: 610632987}
   m_Layer: 0
   m_Name: AnubisDoggo
   m_TagString: Rat
@@ -824,6 +825,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &610632987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610632981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aaa124dc63d5ec489c5c3c118cde4f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCollider: {fileID: 0}
 --- !u!1 &626516230
 GameObject:
   m_ObjectHideFlags: 0

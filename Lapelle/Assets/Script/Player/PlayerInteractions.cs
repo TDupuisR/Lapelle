@@ -26,7 +26,6 @@ public class PlayerInteractions : MonoBehaviour
             TryGetComponent<PlayerCore>(out _playerCore);
     }
 
-
     public bool GiveItem(SOItems a_item)
     {
         if (_item == null)

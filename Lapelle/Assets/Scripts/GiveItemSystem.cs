@@ -22,7 +22,7 @@ public class GiveItemSystem : MonoBehaviour
 
     public void Start()
     {
-        Debug.Log(liste_des_items.Count);
+        Debug.Log("Nombre d'item actuel : " + liste_des_items.Count);
     }
     
     public void RamdomItemEnBas()
