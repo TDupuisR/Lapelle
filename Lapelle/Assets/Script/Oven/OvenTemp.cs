@@ -8,7 +8,7 @@ public class OvenTemp : MonoBehaviour, IInteract
     public int PlayerAssigned { get => _playerAssigned; }
 
     [Space(7)]
-    [SerializeField] private OvenValues _ovenValues;
+    [SerializeField] private OvenManager _ovenValues;
 
     [SerializeField] private Transform _tempCursor;
     [SerializeField] private float _maxAngle = 70;
@@ -69,8 +69,14 @@ public class OvenTemp : MonoBehaviour, IInteract
                 float multi = Mathf.Clamp01(Mathf.Abs(currentTemp) / _ovenValues.TempMax);
                 timeToCook = _ovenValues.CookingTimeMedium + (multi * (_ovenValues.CookingTimeMax - _ovenValues.CookingTimeMedium));
             }
-            
-            _pizzaStatus = Mathf.Clamp(_pizzaStatus + ((100f / timeToCook) * Time.fixedDeltaTime), 0f, 200f);
+
+            float modifier = 1.0f;
+            if (currentTemp > _ovenValues.TempMax && _pizzaStatus > 100f)
+                modifier = 2.0f;
+            else if (currentTemp < -_ovenValues.TempMax)
+                modifier = 0.0f;
+
+            _pizzaStatus = Mathf.Clamp(_pizzaStatus + (((100f / timeToCook) * Time.fixedDeltaTime) * modifier), 0f, 200f);
 
             CookingGaugeUpdate();
         }

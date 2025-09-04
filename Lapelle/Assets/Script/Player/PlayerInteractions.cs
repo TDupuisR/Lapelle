@@ -17,15 +17,13 @@ public class PlayerInteractions : MonoBehaviour
     private ItemBehaviour _item;
     public SOItems ItemInfos
     {
-        get => _item.ItemInfos;
+        get => _item != null ? _item.ItemInfos : null;
     }
 
     private void Start()
     {
         if (_playerCore == null)
             TryGetComponent<PlayerCore>(out _playerCore);
-
-        canInteract = false;
     }
 
 
@@ -78,7 +76,6 @@ public class PlayerInteractions : MonoBehaviour
             }
         }
     }
-    
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.TryGetComponent<IInteract>(out IInteract o_interactor))

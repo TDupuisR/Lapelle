@@ -1,10 +1,11 @@
-using System;
-using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class OvenValues : MonoBehaviour
+public class OvenManager : MonoBehaviour
 {
+    [SerializeField] private OvenTemp _ovenPLayer1;
+    [SerializeField] private OvenTemp _ovenPLayer2;
+
+    [Space(12)]
     [SerializeField] private float _tempLoss = 12f;
     [SerializeField] private float _tempMax = 90f;
     [SerializeField] private float _tempLimit = 200f;
@@ -23,9 +24,12 @@ public class OvenValues : MonoBehaviour
     }
 
     
-    [Space(7)] [SerializeField] private float _cookingTimeMedium = 5f;
+    [Space(7)]
+    [SerializeField] private float _cookingTimeMedium = 5f;
     [SerializeField] private float _cookingTimeMin = 0.5f;
     [SerializeField] private float _cookingTimeMax = 10f;
+
+    [Space(7)]
     [SerializeField] private float _pizzaScore = 100f;
 
     public float CookingTimeMedium
@@ -72,5 +76,11 @@ public class OvenValues : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void ActiveOvens(bool a_runOvens)
+    {
+        _ovenPLayer1.FireIsRunning = a_runOvens;
+        _ovenPLayer2.FireIsRunning = a_runOvens;
     }
 }

@@ -63,6 +63,7 @@ public class PlayerCore : MonoBehaviour, IInteract
 
     public void Interact(PlayerInteractions a_player)
     {
+        Debug.Log($"Receive Interaction {PlayerID}");
         Controller.TakeDamage(a_player.transform.position);
     }
 }

@@ -7,11 +7,11 @@ public class TasCharbon : MonoBehaviour , IInteract
 
     public void Interact(PlayerInteractions a_player)
     {
-        if(a_player.Item != null)
-        {
-            RandomItem();
-            a_player.GiveItem(thisItems);
-        }
+        //if(a_player.Item != null)
+        //{
+        //    RandomItem();
+        //    a_player.GiveItem(thisItems);
+        //}
     }
 
     void RandomItem()

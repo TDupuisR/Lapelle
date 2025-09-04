@@ -10,10 +10,10 @@ public class PlayerController : MonoBehaviour
     
     private Vector2 _moveInput; 
     [SerializeField] private float speed = 5f;
-    [SerializeField] private float knockback = 2f;
+    [SerializeField] private float knockback = 200f;
     
     [SerializeField] private bool isStunt = false;
-    [SerializeField] private float _stunDuration = 3f;
+    [SerializeField] private float _stunDuration = 1f;
     [SerializeField] private bool isInvincible = false;
     [SerializeField] private float _invincibilityDuration = 1f;
     
@@ -46,8 +46,10 @@ public class PlayerController : MonoBehaviour
     {
         if (isInvincible == false)
         {
-            Vector3 move = (transform.position + a_position).normalized;
-            _rb.MovePosition(transform.position + (move * knockback));
+            Debug.Log("Take Damage");
+
+            Vector3 move = (transform.position - a_position).normalized;
+            _rb.AddForce(move * knockback);
             
             isStunt = true;
             Core.Interaction.DropItem();
