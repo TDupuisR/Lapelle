@@ -51,7 +51,7 @@ public class TasCharbon : MonoBehaviour , IInteract
         }
         else
         {
-            Debug.Log("Le joueur porte déjà un objet !");
+            Debug.Log("Le joueur porte dï¿½jï¿½ un objet !");
         }
     }
     SOItems RandomItem()

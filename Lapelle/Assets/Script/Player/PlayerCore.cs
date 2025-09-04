@@ -1,5 +1,13 @@
 using UnityEngine;
 
+public enum AnimationState
+{
+    Idle = 0,
+    Dig = 1,
+    Hit = 2,
+    Walk = 3
+}
+
 public class PlayerCore : MonoBehaviour, IInteract
 {
     [SerializeField] private int _playerID;
@@ -14,6 +22,11 @@ public class PlayerCore : MonoBehaviour, IInteract
 
     [SerializeField] private SpriteRenderer _spriteRenderer;
     public SpriteRenderer SpriteComponent { get => _spriteRenderer; set => _spriteRenderer = value; }
+    [SerializeField] private PizzaSpawner _pizzaSpawner;
+    public PizzaSpawner PizzaServing { get => _pizzaSpawner; }
+
+    [Space(12)]
+    [SerializeField] private Animator _animator;
 
     //public string PlayerName { get => gameObject.name; set => gameObject.name = value; }
 
@@ -63,6 +76,12 @@ public class PlayerCore : MonoBehaviour, IInteract
 
     public void Interact(PlayerInteractions a_player)
     {
+        Debug.Log($"Receive Interaction {PlayerID}");
         Controller.TakeDamage(a_player.transform.position);
+    }
+
+    public void ChangeAnimationState(AnimationState a_animation, Direction a_dir)
+    {
+        _animator.Play()
     }
 }
