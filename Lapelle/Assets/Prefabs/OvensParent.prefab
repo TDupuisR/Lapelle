@@ -196,6 +196,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Four Player 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2736303628234545212, guid: 9027ca55812ced5408d7859b7ccc56dd, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1915878282671266815, guid: d658eba032a123548b1caabdb7705170, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
