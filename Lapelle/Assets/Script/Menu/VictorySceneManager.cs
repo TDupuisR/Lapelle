@@ -8,22 +8,31 @@ public class VictorySceneManager : MonoBehaviour
     public TextMeshProUGUI winnerTextComponent;
 
     // Référence vers le script qui gère les scores des joueurs
-    public OvenValues scoreManager; 
+    public OvenManager scoreManager; 
+
+    private CameraShake cameraShake;
 
     private void Start()
     {
+        cameraShake = FindAnyObjectByType<CameraShake>();
         StartCoroutine(GameTimerCoroutine());
     }
 
-    private void Update()
+    /*private void Update()
     {
         // Check if the 'T' key is pressed down
         if (Input.GetKeyDown(KeyCode.T))
         {
-            Debug.Log("Testing win screen via 'T' key press.");
+            Debug.Log("Test de fin du timer avec la touche T");
+
+            if (cameraShake != null)
+            {
+                cameraShake.Shake(0.5f, 0.25f);
+            }
+
             ShowWinner();
         }
-    }
+    }*/
 
     private IEnumerator GameTimerCoroutine()
     {

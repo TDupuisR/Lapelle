@@ -545,6 +545,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4372106267406556043, guid: 2e4f9d5487d2ac640a69c521f2b94021, type: 3}
+      propertyPath: _ovenManager
+      value: 
+      objectReference: {fileID: 1882446198}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2237,6 +2241,7 @@ GameObject:
   - component: {fileID: 1877666217}
   - component: {fileID: 1877666216}
   - component: {fileID: 1877666219}
+  - component: {fileID: 1877666220}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2362,6 +2367,18 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &1877666220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1877666215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3f311c7138f1a64185a3b5a012f276a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1882446196
 GameObject:
   m_ObjectHideFlags: 0
@@ -2408,6 +2425,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b54ce4e267d4364aa76dc18be368704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ovenPLayer1: {fileID: 0}
+  _ovenPLayer2: {fileID: 0}
   _tempLoss: 12
   _tempMax: 90
   _tempLimit: 200
