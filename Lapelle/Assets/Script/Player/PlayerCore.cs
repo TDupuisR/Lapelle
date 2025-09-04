@@ -82,6 +82,6 @@ public class PlayerCore : MonoBehaviour, IInteract
 
     public void ChangeAnimationState(AnimationState a_animation, Direction a_dir)
     {
-        _animator.Play()
+        
     }
 }
