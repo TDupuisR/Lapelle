@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d483386b2e0999641881624e90246c18, type: 3}
-  m_Name: SOItems 3
+  m_Name: SOItems SuperPiment
   m_EditorClassIdentifier: 
   type: 0
-  itemName: "Gla\xE7on"
+  itemName: Super Piment
   itemSprite: {fileID: 0}
   itemValue: 0

@@ -1,8 +1,6 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerInteractions : MonoBehaviour
@@ -50,8 +48,13 @@ public class PlayerInteractions : MonoBehaviour
 
     public void DropItem()
     {
+
+        if (_item.ItemInfos.type == SOItems.TYPE.Pizza)
+        {
+            Core.PizzaServing.SpawnPizza();
+        }
+        Destroy(_item.gameObject);
         _item = null;
-        canInteract = false;
     }
     
     public void OnAction1(InputValue value)

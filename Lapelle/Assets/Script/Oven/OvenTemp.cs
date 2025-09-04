@@ -1,6 +1,5 @@
 using UnityEngine;
 using NaughtyAttributes;
-using Unity.VisualScripting;
 
 public class OvenTemp : MonoBehaviour, IInteract
 {
@@ -9,6 +8,7 @@ public class OvenTemp : MonoBehaviour, IInteract
 
     [Space(7)]
     [SerializeField] private OvenManager _ovenValues;
+    [SerializeField] private PizzaSpawner _spawner;
 
     [SerializeField] private Transform _tempCursor;
     [SerializeField] private float _maxAngle = 70;
