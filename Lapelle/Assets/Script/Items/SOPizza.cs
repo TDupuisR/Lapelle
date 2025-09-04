@@ -8,4 +8,8 @@ public class SOPizza : SOItems
         type = TYPE.Pizza;
         itemValue = 1.0f;
     }
+    
+    [Space(10)]
+    public Sprite itemBurned = null;
+    public Sprite itemFrozen = null;
 }

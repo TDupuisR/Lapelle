@@ -10,9 +10,11 @@ public class SOFuel : SOItems
     
     public enum EFFECT
     {
-        aaa,
-        bbb,
-        ccc
+        None,
+        Burning,
+        Sand,
+        Perfect,
+        Obstruing
     }
     
     public EFFECT effect;

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 584795fd2a2954e2b848e9b33c75594f, type: 3}
+  m_Name: PizzaRegina
+  m_EditorClassIdentifier: 
+  type: 1
+  itemName: Pizza Regina
+  itemSprite: {fileID: 3323470961411403161, guid: 7f2ce040b625aa54cb91c40f28a61f8e, type: 3}
+  itemValue: 1
+  itemBurned: {fileID: 3494545292880552969, guid: 705d4f43a8c7c9743b3cd8a8072d60be, type: 3}
+  itemFrozen: {fileID: -278850202131239191, guid: 01e3bdb43ef38c44a80aa62699527d7b, type: 3}

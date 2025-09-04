@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private Transform _itemContainer;
+    [SerializeField] private float _zOffset;
 
     private Vector2 _playerDir;
 
@@ -47,8 +48,9 @@ public class PlayerController : MonoBehaviour
     {
         if(isStunt == false)
         {
-            Vector3 move = new Vector3(_moveInput.x, _moveInput.y, 0f);
+            Vector3 move = new Vector3(_moveInput.x, _moveInput.y, 0);
             _rb.MovePosition(transform.position + (move * speed * Time.fixedDeltaTime));
+            Core.SpriteTransform.localPosition = Vector3.forward * transform.position.y;
 
             if (move.magnitude <= 0f && Core.SpriteState != AnimationState.Idle)
             {
@@ -59,7 +61,7 @@ public class PlayerController : MonoBehaviour
                 Core.ChangeAnimationState(AnimationState.Walk);
             }
 
-            Core.ChangeAniamtionDir(move);
+            Core.ChangeAnimationDir(move);
         }
     }
     public static Direction CheckDirection(Vector2 a_dir)

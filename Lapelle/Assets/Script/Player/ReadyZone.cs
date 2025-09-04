@@ -25,7 +25,6 @@ public class ReadyZone : MonoBehaviour
         {
             _timeCurrent -= Time.fixedDeltaTime;
             _sprite.color = Color.Lerp(Color.green, Color.white, _timeCurrent / _timeToReady);
-            Debug.Log($"ReadyZone {_playerID} : {IsReady}");
         }
     }
 

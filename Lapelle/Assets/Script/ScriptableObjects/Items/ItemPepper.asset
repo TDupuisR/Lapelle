@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32029c10a68a206dfb3e6a76aa10343c, type: 3}
+  m_Name: ItemPepper
+  m_EditorClassIdentifier: 
+  type: 0
+  itemName: Pepper
+  itemSprite: {fileID: -2183784562259253388, guid: 3da9441d926934a45afaa9fe413d842e, type: 3}
+  itemValue: 400
+  effect: 1
+  effectValue: 3

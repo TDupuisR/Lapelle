@@ -27,6 +27,7 @@ public class PlayerCore : MonoBehaviour, IInteract
 
     [Space(12)]
     [SerializeField] private Transform _spriteTransform;
+    public Transform SpriteTransform { get => _spriteTransform; }
     [SerializeField] private Animator _animator;
     private AnimationState _animationState;
     public AnimationState SpriteState { get => _animationState; }
@@ -67,7 +68,7 @@ public class PlayerCore : MonoBehaviour, IInteract
         _animator = a_socket.PlayerAnimator;
 
         ChangeAnimationState(AnimationState.Idle);
-        ChangeAniamtionDir(Vector2.zero);
+        ChangeAnimationDir(Vector2.zero);
     }
 
     public void Interact(PlayerInteractions a_player)
@@ -82,10 +83,9 @@ public class PlayerCore : MonoBehaviour, IInteract
             return;
 
         _animationState = a_animation;
-        Debug.Log($"State {(int)_animationState}");
         _animator.SetInteger("State", (int)_animationState);
     }
-    public void ChangeAniamtionDir(Vector2 a_dir)
+    public void ChangeAnimationDir(Vector2 a_dir)
     {
         if (_animator == null)
             return;
@@ -99,15 +99,19 @@ public class PlayerCore : MonoBehaviour, IInteract
             else
                 direction = (int)PlayerController.CheckDirection(a_dir);
         }
-        else
+        else if (_animator.GetInteger("Direction") == 0)
             return;
+        else
+        {
+            _spriteTransform.localRotation = Quaternion.Euler(0, 0, 0);
+            return;
+        }
 
         if (direction == 2 || direction == 0)
             _spriteTransform.localRotation = Quaternion.Euler(0, 180, 0);
         else
             _spriteTransform.localRotation = Quaternion.Euler(0, 0, 0);
-
-        Debug.Log($"Direction {direction}");
+        
         _animator.SetInteger("Direction", direction);
     }
 }

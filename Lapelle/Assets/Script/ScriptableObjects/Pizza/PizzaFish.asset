@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 584795fd2a2954e2b848e9b33c75594f, type: 3}
+  m_Name: PizzaFish
+  m_EditorClassIdentifier: 
+  type: 1
+  itemName: Pizza Fish
+  itemSprite: {fileID: 1025583411244182628, guid: 19f7f39f5c70f5740a771e0cd7e0e5e3, type: 3}
+  itemValue: 1
+  itemBurned: {fileID: -7715397287220050030, guid: 1db838d650f694c438d5c886bb71d570, type: 3}
+  itemFrozen: {fileID: 4648293225787427736, guid: be7acec7c5e0afa44acccaade7e28888, type: 3}
