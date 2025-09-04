@@ -19,6 +19,12 @@ public class PlayerController : MonoBehaviour
     
     [SerializeField] private Rigidbody2D _rb;
 
+    public void Start()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+        _playerCore = GetComponent<PlayerCore>();
+    }
+
     public void OnMove(InputValue value)
     {
         _moveInput = value.Get<Vector2>();
