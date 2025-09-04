@@ -8,7 +8,7 @@ public class VictorySceneManager : MonoBehaviour
     public TextMeshProUGUI winnerTextComponent;
 
     // Référence vers le script qui gère les scores des joueurs
-    public OvenValues scoreManager; 
+    public OvenManager scoreManager; 
 
     private void Start()
     {
