@@ -16,7 +16,7 @@ public class ItemBehaviour : MonoBehaviour
     {
         _itemInfos = a_itemInfos;
         
-        gameObject.name = _itemInfos.name;
+        gameObject.name = _itemInfos.itemName;
         _spriteRenderer.sprite = _itemInfos.itemSprite;
     }
 }
