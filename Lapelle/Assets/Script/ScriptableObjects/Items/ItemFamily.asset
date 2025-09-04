@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ItemFamily
   m_EditorClassIdentifier: 
   type: 0
-  itemName: Sand bag
+  itemName: Family Photo
   itemSprite: {fileID: 0}
   itemValue: 0
-  effect: 2
+  effect: 3
   effectValue: 10

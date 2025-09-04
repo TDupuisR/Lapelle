@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ItemSand
   m_EditorClassIdentifier: 
   type: 0
-  itemName: Sand bag
-  itemSprite: {fileID: 0}
+  itemName: Flour Bag
+  itemSprite: {fileID: -3316945190929687, guid: 3b3fb9e4985080149a579a8b510326c3, type: 3}
   itemValue: 0
   effect: 2
   effectValue: 10
