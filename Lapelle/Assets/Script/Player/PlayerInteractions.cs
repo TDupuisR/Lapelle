@@ -14,19 +14,22 @@ public class PlayerInteractions : MonoBehaviour
     
     private List<IInteract> _interactors = new List<IInteract>();
 
-    private SOItems _item;
-    public SOItems Item
+    private ItemBehaviour _item;
+    public SOItems ItemInfos
     {
-        get => _item;
+        get => _item.ItemInfos;
     }
 
     private void Start()
     {
         if (_playerCore == null)
             TryGetComponent<PlayerCore>(out _playerCore);
+
+        canInteract = false;
     }
 
-    public bool GiveItem(SOItems a_item)
+
+    public bool GiveItem(ItemBehaviour a_item)
     {
         if (_item == null)
         {
@@ -41,8 +44,9 @@ public class PlayerInteractions : MonoBehaviour
     {
         if (_item == null)
             return null;
-        
-        SOItems item = _item;
+
+        SOItems item = _item.ItemInfos;
+        Destroy(_item.gameObject);
         _item = null;
         return item;
     }
