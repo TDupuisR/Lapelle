@@ -21,8 +21,11 @@ public class PlayerController : MonoBehaviour
 
     public void Start()
     {
-        _rb = GetComponent<Rigidbody2D>();
-        _playerCore = GetComponent<PlayerCore>();
+        if (_rb == null)
+                TryGetComponent<Rigidbody2D>(out _rb);
+
+        if (_playerCore == null)
+                TryGetComponent<PlayerCore>(out _playerCore);
     }
 
     public void OnMove(InputValue value)
