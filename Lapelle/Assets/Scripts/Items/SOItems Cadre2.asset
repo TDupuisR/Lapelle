@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d483386b2e0999641881624e90246c18, type: 3}
-  m_Name: SOItems 6
+  m_Name: SOItems Cadre2
   m_EditorClassIdentifier: 
   type: 0
   itemName: Cadre2
