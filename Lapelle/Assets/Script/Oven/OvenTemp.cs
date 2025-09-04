@@ -80,8 +80,8 @@ public class OvenTemp : MonoBehaviour, IInteract
     {
         if (PlayerAssigned != a_player.Core.PlayerID)
         {
-            if (a_player.Item != null &&
-                a_player.Item.type == SOItems.TYPE.Fuel)
+            if (a_player.ItemInfos != null &&
+                a_player.ItemInfos.type == SOItems.TYPE.Fuel)
             {
                 AddInFire((SOFuel)a_player.TakeItem());
             }
@@ -89,9 +89,9 @@ public class OvenTemp : MonoBehaviour, IInteract
             return;
         }
         
-        if (a_player.Item != null)
+        if (a_player.ItemInfos != null)
         {
-            switch (a_player.Item.type)
+            switch (a_player.ItemInfos.type)
             {
                 case SOItems.TYPE.Pizza:
                     if (_isPizzaIn)
