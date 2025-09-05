@@ -7,6 +7,8 @@ public class ReadyZone : MonoBehaviour
     [SerializeField] private int _playerID = 0;
     [SerializeField] private SpriteRenderer _sprite;
 
+    [SerializeField] private Color _colorTarget;
+
     [SerializeField] private float _timeToReady = 2f;
     private float _timeCurrent = 2f;
 
@@ -24,7 +26,7 @@ public class ReadyZone : MonoBehaviour
         if (_isPlayerIn && _timeCurrent > 0)
         {
             _timeCurrent -= Time.fixedDeltaTime;
-            _sprite.color = Color.Lerp(Color.green, Color.white, _timeCurrent / _timeToReady);
+            _sprite.color = Color.Lerp(_colorTarget, Color.white, _timeCurrent / _timeToReady);
         }
     }
 
@@ -36,7 +38,7 @@ public class ReadyZone : MonoBehaviour
             {
                 _isPlayerIn = true;
                 _timeCurrent = _timeToReady;
-                _sprite.color = Color.Lerp(Color.green, Color.white, _timeCurrent / _timeToReady);
+                _sprite.color = Color.Lerp(_colorTarget, Color.white, _timeCurrent / _timeToReady);
             }
         }
     }
@@ -48,7 +50,7 @@ public class ReadyZone : MonoBehaviour
             {
                 _isPlayerIn = false;
                 _timeCurrent = _timeToReady;
-                _sprite.color = Color.Lerp(Color.green, Color.white, _timeCurrent / _timeToReady);
+                _sprite.color = Color.Lerp(_colorTarget, Color.white, _timeCurrent / _timeToReady);
             }
         }
     }

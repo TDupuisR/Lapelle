@@ -15,6 +15,10 @@ public class OvenTemp : MonoBehaviour, IInteract
     [SerializeField] private Transform _tempCursor;
     [SerializeField] private float _maxAngle = 70;
 
+    [Space(7)]
+    [SerializeField] private GameObject _sparkPrefab;
+    [SerializeField] private GameObject _snowPrefab;
+
     [Space(10)]
     [SerializeField] private AudioSource _ambiantSource;
     [SerializeField] private AudioSource _effectSource;
@@ -114,6 +118,12 @@ public class OvenTemp : MonoBehaviour, IInteract
 
             CookingGaugeUpdate();
         }
+
+    }
+    private IEnumerator DeactivateEffectPrefab(GameObject o_prefab)
+    {
+        yield return new WaitForSeconds(1);
+        o_prefab.SetActive(false);
     }
 
     public bool Interact(PlayerInteractions a_player)
@@ -172,6 +182,17 @@ public class OvenTemp : MonoBehaviour, IInteract
     private void AddInFire(SOFuel a_fuelItem)
     {
         currentTemp += a_fuelItem.itemValue;
+
+        if (a_fuelItem.itemValue > 0)
+        {
+            _sparkPrefab.SetActive(true);
+            StartCoroutine(DeactivateEffectPrefab(_sparkPrefab));
+        }
+        else if (a_fuelItem.itemValue < 0)
+        {
+            _snowPrefab.SetActive(true);
+            StartCoroutine(DeactivateEffectPrefab(_snowPrefab));
+        }
 
         if (a_fuelItem.effectSound != null)
             _effectSource.PlayOneShot(a_fuelItem.effectSound);

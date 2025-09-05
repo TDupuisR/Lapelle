@@ -15,7 +15,7 @@ MonoBehaviour:
   type: 0
   itemName: Big Coal
   itemSprite: {fileID: -998238982674924479, guid: 6dde68ff8de38b44d9d7219f44ac34fa, type: 3}
-  itemValue: 100
+  itemValue: 120
   effect: 0
   effectValue: 0
   effectSound: {fileID: 8300000, guid: 2dbf70ab428d7f71b98da656478584c4, type: 3}
