@@ -8,7 +8,6 @@ public class PauseManager : MonoBehaviour
 {
     public static bool isPaused = false;
 
-    // Références aux panneaux DANS LA SCÈNE DE JEU
     public GameObject pauseMenuPanel;
     public GameObject settingsPanel;
 
