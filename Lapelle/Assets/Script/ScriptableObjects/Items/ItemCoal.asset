@@ -15,7 +15,7 @@ MonoBehaviour:
   type: 0
   itemName: Coal
   itemSprite: {fileID: -3097987332743803679, guid: 7bc9f5dbdaf5032498e938722224f825, type: 3}
-  itemValue: 50
+  itemValue: 60
   effect: 0
   effectValue: 0
   effectSound: {fileID: 8300000, guid: 2dbf70ab428d7f71b98da656478584c4, type: 3}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   itemName: Cursed Photo
-  itemSprite: {fileID: 0}
+  itemSprite: {fileID: 6358011358318101292, guid: d55cc5272985faa43a3684ccc7aef426, type: 3}
   itemValue: 0
   effect: 3
   effectValue: 4

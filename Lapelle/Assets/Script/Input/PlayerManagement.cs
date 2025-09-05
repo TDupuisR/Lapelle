@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerManagement : MonoBehaviour
 {
@@ -41,6 +42,7 @@ public class PlayerManagement : MonoBehaviour
 
     private float StartTimer;
     [SerializeField] private TextMeshProUGUI _timerText;
+    [SerializeField] private Image _titleImage;
     
     private void Start()
     {
@@ -133,6 +135,8 @@ public class PlayerManagement : MonoBehaviour
 
     private void CallStart()
     {
+        _titleImage.color = new Color(1, 1, 1, 0);
+
         _victoryManager.StartTimer();
         
         _ovenManager.ActiveOvens(true);
