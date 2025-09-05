@@ -28,6 +28,7 @@ public class PauseManager : MonoBehaviour
         // On quitte le menu pause pour aller aux réglages
         pauseMenuPanel.SetActive(false);
         settingsPanel.SetActive(true);
+        Debug.Log("Settings");
     }
 
     public void CloseSettings()
