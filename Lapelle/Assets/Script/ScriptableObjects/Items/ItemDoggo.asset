@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32029c10a68a206dfb3e6a76aa10343c, type: 3}
-  m_Name: ItemFamily
+  m_Name: ItemDoggo
   m_EditorClassIdentifier: 
   type: 0
-  itemName: Family Photo
-  itemSprite: {fileID: -2361393526692194565, guid: 5621565881a60f5448da7a73046112f6, type: 3}
+  itemName: Doggo Photo
+  itemSprite: {fileID: 8473801959528828507, guid: 59036e8446c14cb48b3bac01668d83b5, type: 3}
   itemValue: 0
   effect: 3
-  effectValue: 3
+  effectValue: 6
   effectSound: {fileID: 8300000, guid: 443e419cab43b8060b494135e9de19d5, type: 3}

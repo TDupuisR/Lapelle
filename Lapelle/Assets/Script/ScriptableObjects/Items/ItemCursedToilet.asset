@@ -16,6 +16,6 @@ MonoBehaviour:
   itemName: Cursed Photo
   itemSprite: {fileID: 0}
   itemValue: 0
-  effect: 4
-  effectValue: 10
+  effect: 3
+  effectValue: 4
   effectSound: {fileID: 8300000, guid: 443e419cab43b8060b494135e9de19d5, type: 3}
