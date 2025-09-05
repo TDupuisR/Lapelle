@@ -103,12 +103,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemFrequencies:
-  - _fuelItemInfos: {fileID: 11400000, guid: 20c4eab91e0a582b9a37b7f72d7d24df, type: 2}
-    frequency: 7
-  - _fuelItemInfos: {fileID: 11400000, guid: 636ba95447c32d0a688b5f443c45f75a, type: 2}
+  - _fuelItemInfos: {fileID: 11400000, guid: 834ddc7728ec4c476910f080a25857e7, type: 2}
     frequency: 10
+  - _fuelItemInfos: {fileID: 11400000, guid: e0619dfa588ed99ecbe926587aa8e02d, type: 2}
+    frequency: 8
+  - _fuelItemInfos: {fileID: 11400000, guid: 95aa8dc2d09c98466acada3bec0e0dd4, type: 2}
+    frequency: 7
+  - _fuelItemInfos: {fileID: 11400000, guid: 356c57af182d7d647a8d565c3a2036f5, type: 2}
+    frequency: 5
+  - _fuelItemInfos: {fileID: 11400000, guid: 20c4eab91e0a582b9a37b7f72d7d24df, type: 2}
+    frequency: 25
   - _fuelItemInfos: {fileID: 11400000, guid: 5bdcd5c1d32ac8acca811992a9697043, type: 2}
+    frequency: 10
+  - _fuelItemInfos: {fileID: 11400000, guid: 9d05cacdb10faf690a5c1b07bf1e86f7, type: 2}
+    frequency: 5
+  - _fuelItemInfos: {fileID: 11400000, guid: a9658e4beb8ca1c0f8db6d5912db67b8, type: 2}
     frequency: 3
+  - _fuelItemInfos: {fileID: 11400000, guid: 3d8e4897ae7c7474b8bd9042e3f55cf2, type: 2}
+    frequency: 2
   _itemPrefab: {fileID: 3703579406066307262, guid: 389fdb5d6b6a6044eae758f531609b13, type: 3}
   interactable: 0
   _digChance: 0.2
