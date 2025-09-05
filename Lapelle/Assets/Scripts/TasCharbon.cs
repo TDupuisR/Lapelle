@@ -39,8 +39,10 @@ public class TasCharbon : MonoBehaviour , IInteract
        newItem = newItemObj.GetComponent<ItemBehaviour>();
     }
 
-    public void Interact(PlayerInteractions a_player)
+    public bool Interact(PlayerInteractions a_player)
     {
+        return false;
+        
         //if (a_player.ItemInfos == null)
         if(!a_player.HasItem())
         {
@@ -67,7 +69,7 @@ public class TasCharbon : MonoBehaviour , IInteract
 
         resultFinal = ResultEnBas(randomize,0);
 
-        Debug.Log("Le joueur à obtenu l'objet : " + listItem[resultFinal]);
+        Debug.Log("Le joueur ï¿½ obtenu l'objet : " + listItem[resultFinal]);
         return listItem[resultFinal];
     }
 

@@ -19,9 +19,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed = 5f;
     [SerializeField] private float knockback = 200f;
     
-    [SerializeField] private bool isStunt = false;
+    [SerializeField] private bool isStun = false;
     [SerializeField] private float _stunDuration = 1f;
     [SerializeField] private bool isInvincible = false;
+    public bool IsInvincible { get => isInvincible; }
     [SerializeField] private float _invincibilityDuration = 1f;
     
     [SerializeField] private Rigidbody2D _rb;
@@ -46,7 +47,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(isStunt == false)
+        if(isStun == false)
         {
             Vector3 move = new Vector3(_moveInput.x, _moveInput.y, 0);
             _rb.MovePosition(transform.position + (move * speed * Time.fixedDeltaTime));
@@ -93,12 +94,15 @@ public class PlayerController : MonoBehaviour
     {
         if (isInvincible == false)
         {
-            Debug.Log("Take Damage");
-
             Vector3 move = (transform.position - a_position).normalized;
             _rb.AddForce(move * knockback);
-            
-            isStunt = true;
+
+            Core.audioSource.clip = Core.stunSound;
+            Core.audioSource.loop = true;
+            Core.audioSource.Play();    
+                
+            Core.StunEffect = true;
+            isStun = true;
             Core.Interaction.canInteract = false;
             Core.Interaction.DropItem();
             isInvincible = true;
@@ -110,8 +114,13 @@ public class PlayerController : MonoBehaviour
     private IEnumerator StopAttackIsStun()
     {
         yield return new WaitForSeconds(_stunDuration);
-        isStunt = false;
+        isStun = false;
+        Core.StunEffect = false;
         Core.Interaction.canInteract = true;
+        
+        Core.audioSource.Stop();
+        Core.audioSource.loop = false;
+        
         yield return new WaitForSeconds(_invincibilityDuration);
         isInvincible = false;
     }

@@ -1,15 +1,16 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class SandItemsSpawner : MonoBehaviour
+public class SandItemsSpawner : MonoBehaviour, IInteract
 {
     [SerializeField] private List<ItemFrequency> _itemFrequencies = new List<ItemFrequency>();
     private int _numberOfItems;
     [SerializeField] private GameObject _itemPrefab;
     
+    public bool interactable = false;
+    
     [Space(7)]
-    [SerializeField] private int _digRepeat = 20;
-    private int _digCount;
+    [SerializeField] private float _digChance = 0.1f;
     
     private void Start()
     {
@@ -18,22 +19,26 @@ public class SandItemsSpawner : MonoBehaviour
             _numberOfItems += _itemFrequencies[i].frequency;
         }
         
-        _digCount = _digRepeat;
+        interactable = false;
     }
 
-    public void Interact(PlayerInteractions a_player)
+    public bool Interact(PlayerInteractions a_player)
     {
-        if (a_player.ItemInfos != null)
-            return;
+        if (a_player.ItemInfos != null ||
+            !interactable)
+            return false;
 
-        if (_digCount > 0)
+        float digging = Random.Range(0f, 1f);
+        
+        if (digging > _digChance)
         {
-            _digCount--;
-            return;
+            a_player.Core.ChangeAnimationState(AnimationState.Dig);
+            a_player.Core.audioSource.PlayOneShot(a_player.Core.digSound);
         }
         else
         {
-            _digCount = _digRepeat;
+            a_player.Core.ChangeAnimationState(AnimationState.Dig);
+            a_player.Core.audioSource.PlayOneShot(a_player.Core.digSound);
             
             int rand = Random.Range(1, _numberOfItems);
             SOFuel item = null;
@@ -64,5 +69,7 @@ public class SandItemsSpawner : MonoBehaviour
             
             a_player.GiveItem(_itemScript);
         }
+        
+        return true;
     }
 }

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class OvenManager : MonoBehaviour
@@ -31,6 +32,8 @@ public class OvenManager : MonoBehaviour
 
     [Space(7)]
     [SerializeField] private float _pizzaScore = 100f;
+    [SerializeField] private TextMeshProUGUI _scoreText1;
+    [SerializeField] private TextMeshProUGUI _scoreText2;
 
     public float CookingTimeMedium
     {
@@ -60,6 +63,9 @@ public class OvenManager : MonoBehaviour
     {
         _player1Score = 0;
         _player2Score = 0;
+        
+        _scoreText1.text = $"Player 1";
+        _scoreText2.text = $"Player 2";
     }
 
     public void AddScore(int a_playerNumber, float a_cookingAccuracy, float modifier = 1f)
@@ -68,9 +74,11 @@ public class OvenManager : MonoBehaviour
         {
             case 1:
                 _player1Score += Mathf.RoundToInt(a_cookingAccuracy * _pizzaScore * modifier);
+                _scoreText1.text = $"{_player1Score} Pts";
                 break;
             case 2:
                 _player2Score += Mathf.RoundToInt(a_cookingAccuracy * _pizzaScore * modifier);
+                _scoreText2.text = $"{_player2Score} Pts";
                 break;
             
             default:

@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 668440835572852884}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: 0, z: 0}
+  m_LocalPosition: {x: -7, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -124,13 +124,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb84f5135b9c6ff7f80f689736c956ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerColor1: {r: 1, g: 0, b: 0, a: 1}
-  _playerColor2: {r: 0, g: 0.34800243, b: 1, a: 1}
+  _playerPrefab1: {fileID: 4844874228271479813, guid: 19e57fa3eb6ffc8449d1830e8e171e41, type: 3}
+  _playerPrefab2: {fileID: 1645757484863535837, guid: d40a468774cd8204a8bee8341e4f75be, type: 3}
   _player1Spawn: {fileID: 7454119393000744590}
   _player2Spawn: {fileID: 3877156600848513782}
   _zonePlayer1: {fileID: 3949435990009241309}
   _zonePlayer2: {fileID: 5238123142518629112}
   _ovenManager: {fileID: 0}
+  _itemsSpawners:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _pizzaSpawners:
+  - {fileID: 0}
+  - {fileID: 0}
+  _sandItemsSpawner: {fileID: 0}
+  _victoryManager: {fileID: 0}
+  _timerText: {fileID: 0}
 --- !u!1 &8534169973088632468
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,7 +166,7 @@ Transform:
   m_GameObject: {fileID: 8534169973088632468}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: 0, z: 0}
+  m_LocalPosition: {x: 7, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -172,7 +182,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 611753710739091388, guid: 938a79f4e7245fb46b4640f0b473496a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 611753710739091388, guid: 938a79f4e7245fb46b4640f0b473496a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -257,7 +267,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 611753710739091388, guid: 938a79f4e7245fb46b4640f0b473496a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.5
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 611753710739091388, guid: 938a79f4e7245fb46b4640f0b473496a, type: 3}
       propertyPath: m_LocalPosition.y

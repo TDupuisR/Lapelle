@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
 
+
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerInteractions : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class PlayerInteractions : MonoBehaviour
     public bool canInteract;
     
     private List<IInteract> _interactors = new List<IInteract>();
+    private IInteract _playerInteract = null;
 
     private ItemBehaviour _item;
     public SOItems ItemInfos
@@ -29,6 +31,8 @@ public class PlayerInteractions : MonoBehaviour
         if (_item == null)
         {
             _item = a_item;
+            _item.transform.parent = Core.Socket;
+            _item.transform.localPosition = Vector3.zero;
             
             return true;
         }
@@ -48,7 +52,9 @@ public class PlayerInteractions : MonoBehaviour
 
     public void DropItem()
     {
-
+        if (_item == null)
+            return;
+        
         if (_item.ItemInfos.type == SOItems.TYPE.Pizza)
         {
             Core.PizzaServing.SpawnPizza();
@@ -61,9 +67,15 @@ public class PlayerInteractions : MonoBehaviour
     {
         if (canInteract && value.Get<float>() > 0f)
         {
-            if (_interactors.Count > 0)
+            if (_playerInteract != null)
+                _playerInteract.Interact(this);
+            else
             {
-                _interactors[0].Interact(this);
+                for (int i = 0; i < _interactors.Count; i++)
+                {
+                    if (_interactors[0].Interact(this))
+                        break;
+                }
             }
         }
     }
@@ -74,8 +86,14 @@ public class PlayerInteractions : MonoBehaviour
         {
             if (!_interactors.Contains(o_interactor))
             {
-                _interactors.Add(o_interactor);
-                canInteract = true;
+                if (collision.TryGetComponent<PlayerCore>(out PlayerCore o_playerCore))
+                {
+                    _playerInteract = o_interactor;
+                }
+                else
+                {
+                    _interactors.Add(o_interactor);
+                }
             }
         }
     }
@@ -83,8 +101,10 @@ public class PlayerInteractions : MonoBehaviour
     {
         if (collision.TryGetComponent<IInteract>(out IInteract o_interactor))
         {
-            _interactors.Remove(o_interactor);
-            canInteract = false;
+            if (o_interactor == _playerInteract)
+                _playerInteract = null;
+            else
+                _interactors.Remove(o_interactor);
         }
     }
 

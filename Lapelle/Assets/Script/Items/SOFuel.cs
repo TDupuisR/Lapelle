@@ -19,4 +19,6 @@ public class SOFuel : SOItems
     
     public EFFECT effect;
     public float effectValue = 1.0f;
+    
+    public AudioClip effectSound = null;
 }

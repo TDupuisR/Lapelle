@@ -1,10 +1,14 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PizzaSpawner : MonoBehaviour, IInteract
 {
-    [SerializeField] private SOPizza _pizzaInfos;
+    [SerializeField] private List<SOPizza> _pizzaInfos = new List<SOPizza>();
     [SerializeField] private GameObject _pizzaPrefab;
+    
+    [FormerlySerializedAs("_pizzaTag")] [SerializeField] private int _pizzaBoxId;
 
     [Space(7)]
     [SerializeField] private ItemBehaviour _itemScript;
@@ -26,7 +30,8 @@ public class PizzaSpawner : MonoBehaviour, IInteract
 
         if (item.TryGetComponent<ItemBehaviour>(out _itemScript))
         {
-            _itemScript.Init(_pizzaInfos);
+            SOPizza pizza = _pizzaInfos[Random.Range(0, _pizzaInfos.Count -1)];
+            _itemScript.Init(pizza);
             _itemScript.transform.localPosition = Vector3.zero;
         }
         else
@@ -54,12 +59,15 @@ public class PizzaSpawner : MonoBehaviour, IInteract
         yield return null;
     }
 
-    public void Interact(PlayerInteractions a_player)
+    public bool Interact(PlayerInteractions a_player)
     {
-        if (a_player.ItemInfos != null ||
+        if (_pizzaBoxId != a_player.Core.PlayerID ||
+            a_player.ItemInfos != null ||
             _itemScript == null)
-            return;
+            return false;
 
         a_player.GiveItem(_itemScript);
+        a_player.Core.audioSource.PlayOneShot(a_player.Core.pickSound);
+        return true;
     }
 }

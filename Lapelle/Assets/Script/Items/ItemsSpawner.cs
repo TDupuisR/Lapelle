@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public struct ItemFrequency
 {
     public SOFuel _fuelItemInfos;
     public int frequency;
 }
-public class ItemsSpawner : MonoBehaviour
+public class ItemsSpawner : MonoBehaviour, IInteract
 {
     [SerializeField] private List<ItemFrequency> _itemFrequencies = new List<ItemFrequency>();
     private int _numberOfItems;
@@ -48,6 +49,7 @@ public class ItemsSpawner : MonoBehaviour
         {
             _itemScript.Init(item);
             _itemScript.transform.localPosition = Vector3.zero;
+            _itemScript.transform.localScale = Vector3.one * 0.7f;
         }
         else
         {
@@ -56,13 +58,15 @@ public class ItemsSpawner : MonoBehaviour
         }
     }
     
-    public void Interact(PlayerInteractions a_player)
+    public bool Interact(PlayerInteractions a_player)
     {
         if (a_player.ItemInfos != null ||
             _itemScript == null)
-            return;
+            return false;
 
         a_player.GiveItem(_itemScript);
+        a_player.Core.audioSource.PlayOneShot(a_player.Core.digSound);
         SpawnItem();
+        return true;
     }
 }

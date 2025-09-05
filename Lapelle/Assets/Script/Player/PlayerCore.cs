@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public enum AnimationState
 {
@@ -31,6 +32,17 @@ public class PlayerCore : MonoBehaviour, IInteract
     [SerializeField] private Animator _animator;
     private AnimationState _animationState;
     public AnimationState SpriteState { get => _animationState; }
+    [SerializeField] private GameObject _stunEffect;
+    public bool StunEffect { set => _stunEffect.SetActive(value); }
+    
+    [Space(10)]
+    [SerializeField] public AudioSource audioSource;
+    [SerializeField] public AudioClip stunSound;
+    [SerializeField] public AudioClip hitSound;
+    [SerializeField] public AudioClip digSound;
+    [SerializeField] public AudioClip pickSound;
+    
+    private GameLoopManager _gameLoopManager;
 
     private void Start()
     {
@@ -59,22 +71,29 @@ public class PlayerCore : MonoBehaviour, IInteract
         }
     }
 
-    public void Init(int a_playerID, AnimationSocket a_socket)
+    public void Init(int a_playerID, AnimationSocket a_socket, GameLoopManager a_gameLoopManager)
     {
         _playerID = a_playerID;
 
         _animationSocket = a_socket;
         _spriteTransform = a_socket.transform;
         _animator = a_socket.PlayerAnimator;
+        _stunEffect = a_socket.StunEffect;
+        
+        _gameLoopManager = a_gameLoopManager;
 
         ChangeAnimationState(AnimationState.Idle);
         ChangeAnimationDir(Vector2.zero);
     }
 
-    public void Interact(PlayerInteractions a_player)
+    public bool Interact(PlayerInteractions a_player)
     {
         a_player.Core.ChangeAnimationState(AnimationState.Hit);
+        if(!Controller.IsInvincible)
+            a_player.Core.audioSource.PlayOneShot(hitSound);
+        
         Controller.TakeDamage(a_player.transform.position);
+        return true;
     }
 
     public void ChangeAnimationState(AnimationState a_animation)
@@ -113,5 +132,17 @@ public class PlayerCore : MonoBehaviour, IInteract
             _spriteTransform.localRotation = Quaternion.Euler(0, 0, 0);
         
         _animator.SetInteger("Direction", direction);
+    }
+
+    public void OnReset(InputValue value)
+    {
+        if (!_gameLoopManager.GameIsRunning)
+        {
+            Destroy(gameObject);
+        }
+        else if (_gameLoopManager.WaitForEndInput)
+        {
+            _gameLoopManager.ResetGame();
+        }
     }
 }
