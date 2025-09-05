@@ -1,8 +1,5 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Video;
-using UnityEditor;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -42,7 +39,7 @@ public class MainMenuManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
-        EditorApplication.isPlaying = false;
+        //EditorApplication.isPlaying = false;
     }
 
 }
