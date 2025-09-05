@@ -90,5 +90,8 @@ public class OvenManager : MonoBehaviour
     {
         _ovenPLayer1.FireIsRunning = a_runOvens;
         _ovenPLayer2.FireIsRunning = a_runOvens;
+
+        _scoreText1.text = $"{_player1Score} Pts";
+        _scoreText2.text = $"{_player2Score} Pts";
     }
 }

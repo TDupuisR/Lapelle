@@ -184,7 +184,7 @@ MonoBehaviour:
   speed: 5
   knockback: 50
   isStun: 0
-  _stunDuration: 3
+  _stunDuration: 1.5
   isInvincible: 0
   _invincibilityDuration: 1
   _rb: {fileID: 7401790568172936539}
