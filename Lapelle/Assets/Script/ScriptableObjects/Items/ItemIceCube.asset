@@ -18,3 +18,4 @@ MonoBehaviour:
   itemValue: -30
   effect: 0
   effectValue: 0
+  effectSound: {fileID: 8300000, guid: bab21f33b87e6ea03b546adf48ab98f2, type: 3}

@@ -1,4 +1,4 @@
-using System.Diagnostics;
+using System.Collections;
 using UnityEngine;
 using NaughtyAttributes;
 using Debug = UnityEngine.Debug;
@@ -47,6 +47,7 @@ public class OvenTemp : MonoBehaviour, IInteract
     [SerializeField] private Transform _cookingGaugeTransform;
     [SerializeField] private SpriteRenderer _cookingGaugeSprite;
 
+    private int obstruing = 0;
 
     [SerializeField] private bool _fireIsRunning = true;
 
@@ -117,6 +118,13 @@ public class OvenTemp : MonoBehaviour, IInteract
 
     public bool Interact(PlayerInteractions a_player)
     {
+        if (obstruing > 0)
+        {
+            obstruing--;
+            a_player.Core.audioSource.PlayOneShot(a_player.Core.digSound);
+            return true;
+        }
+        
         if (PlayerAssigned != a_player.Core.PlayerID)
         {
             if (a_player.ItemInfos != null &&
@@ -172,9 +180,34 @@ public class OvenTemp : MonoBehaviour, IInteract
         
         switch (a_fuelItem.effect)
         {
+            case SOFuel.EFFECT.Burning:
+                StartCoroutine(BurningEffect(a_fuelItem.effectValue));
+                break;
+            case SOFuel.EFFECT.Perfect:
+                StartCoroutine(PerfectEffect(a_fuelItem.effectValue));
+                break;
+            case SOFuel.EFFECT.Obstruing:
+                obstruing = (int)a_fuelItem.effectValue;
+                break;
+            
             default:
                 break;
         }
+    }
+
+    private IEnumerator BurningEffect(float a_time)
+    {
+        currentTemp = _ovenValues.TempLimit;
+        _fireIsRunning = false;
+        yield return new WaitForSeconds(a_time);
+        _fireIsRunning = true;
+    }
+    private IEnumerator PerfectEffect(float a_time)
+    {
+        currentTemp = 0;
+        _fireIsRunning = false;
+        yield return new WaitForSeconds(a_time);
+        _fireIsRunning = true;
     }
     
     private bool AddPizza(SOPizza a_pizza)
